@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let verticalPipeGap = 170.0
+    let delayBetweenPipes: TimeInterval = 2.0
 
     private enum BoxTextureName: String {
         case first = "cheerzbox-1"
@@ -177,7 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // spawn the pipes
         let spawn = SKAction.run(spawnPipes)
-        let delay = SKAction.wait(forDuration: TimeInterval(2.0))
+        let delay = SKAction.wait(forDuration: delayBetweenPipes)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
         run(spawnThenDelayForever)
