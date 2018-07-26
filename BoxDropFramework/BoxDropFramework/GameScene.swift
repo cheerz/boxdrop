@@ -10,8 +10,10 @@ import SpriteKit
 
 class GameScene: SKScene {
 
-    let verticalPipeGap = 170.0
-    let delayBetweenPipes: TimeInterval = 2.0
+    private struct GameSettings {
+        static let verticalPipeGap = 170.0
+        static let delayBetweenPipes: TimeInterval = 2.0
+    }
 
     private enum BoxTextureName: String {
         case first = "cheerzbox-1"
@@ -195,7 +197,7 @@ class GameScene: SKScene {
 
         // spawn the pipes
         let spawn = SKAction.run(spawnPipes)
-        let delay = SKAction.wait(forDuration: delayBetweenPipes)
+        let delay = SKAction.wait(forDuration: GameSettings.delayBetweenPipes)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
         run(spawnThenDelayForever)
@@ -233,7 +235,7 @@ class GameScene: SKScene {
 
         let pipeDown = SKSpriteNode(texture: pipeTextureDown)
         pipeDown.setScale(2.0)
-        pipeDown.position = CGPoint(x: 0.0, y: y + Double(pipeDown.size.height) + verticalPipeGap)
+        pipeDown.position = CGPoint(x: 0.0, y: y + Double(pipeDown.size.height) + GameSettings.verticalPipeGap)
 
         pipeDown.physicsBody = SKPhysicsBody(rectangleOf: pipeDown.size)
         pipeDown.physicsBody?.isDynamic = false
