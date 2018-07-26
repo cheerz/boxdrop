@@ -11,6 +11,8 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
+    let birdAtlas = SKTextureAtlas(named:"bird")
+
     var bird: SKSpriteNode!
     var skyColor: SKColor!
     var pipeTextureUp: SKTexture!
@@ -26,17 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-
-    private func createBirdsTextures() -> [SKTexture] {
-        let birdTextureNames = ["bird-01", "bird-02", "bird-03", "bird-04"]
-        let birdTextures: [SKTexture] = birdTextureNames.map { name in
-            let birdTexture = SKTexture(imageNamed: name)
-            birdTexture.filteringMode = .nearest
-            return birdTexture
-        }
-
-        return birdTextures
-    }
 
     private func setupPhysics() {
         self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
@@ -65,6 +56,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pipeTextureUp.filteringMode = .nearest
         pipeTextureDown = SKTexture(imageNamed: "PipeDown")
         pipeTextureDown.filteringMode = .nearest
+    }
+
+    private func createBirdsTextures() -> [SKTexture] {
+        let birdTextureNames = ["bird-01", "bird-02", "bird-03", "bird-04"]
+        var birdTextures: [SKTexture] = []
+        birdTextureNames.forEach { name in
+            birdTextures.append(birdAtlas.textureNamed(name))
+        }
+
+        return birdTextures
     }
 
     private func setupBird() {
