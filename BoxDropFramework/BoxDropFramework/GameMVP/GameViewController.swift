@@ -33,6 +33,7 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var closeButton: UIButton!
 
     var presenter: Game.Presenter?
 
@@ -69,6 +70,12 @@ class GameViewController: UIViewController {
         } else {
             return UIInterfaceOrientationMask.all
         }
+    }
+
+    // MARK: IBAction
+
+    @IBAction func closeView(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
