@@ -34,9 +34,13 @@ class GameViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var closeButtonLabel: UILabel!
 
     var presenter: Game.Presenter?
-    private let font = UIFont(name: "Nunito-SemiBold", size: 17)
+
+    private enum Font: String {
+        case nunitoSemiBold = "Nunito-SemiBold"
+    }
 
     // MARK: - Lifecycle
 
@@ -78,8 +82,10 @@ class GameViewController: UIViewController {
 
     func setupUI() {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
-        closeButton.titleLabel?.font = font // Font is good on Storyboard but not in Simulator
-        closeButton.setTitle("SKIP", for: .normal)
+        closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoSemiBold.rawValue,
+                                                     size: 17.0,
+                                                     bundle: Bundle(for: GameViewController.self),
+                                                     type: .trueTypeFont)
     }
 
     // MARK: IBAction
@@ -101,3 +107,4 @@ extension GameViewController: Game.View {
         previewImageView.image = image
     }
 }
+

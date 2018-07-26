@@ -26,25 +26,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVZ-8y-VmU">
-                                <rect key="frame" x="155" y="535" width="64" height="44"/>
+                                <rect key="frame" x="149.5" y="535" width="77.5" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gj1-tm-Nhw">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                                        <rect key="frame" x="-0.5" y="0.0" width="77.5" height="44"/>
                                         <color key="backgroundColor" red="1" green="0.76862745098039209" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="QQQQ">
+                                        <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="closeView:" destination="HCV-Rl-Rcd" eventType="touchUpInside" id="kxI-2h-eoz"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKIP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ife-w6-hrd">
+                                        <rect key="frame" x="20" y="-0.5" width="37.5" height="44"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="gj1-tm-Nhw" firstAttribute="centerX" secondItem="tVZ-8y-VmU" secondAttribute="centerX" id="4UZ-vP-jVD"/>
-                                    <constraint firstAttribute="width" constant="64" id="9Em-hv-gtH"/>
+                                    <constraint firstItem="ife-w6-hrd" firstAttribute="height" secondItem="tVZ-8y-VmU" secondAttribute="height" id="DJ2-g9-oH0"/>
+                                    <constraint firstItem="ife-w6-hrd" firstAttribute="centerY" secondItem="tVZ-8y-VmU" secondAttribute="centerY" id="FSR-5l-0wd"/>
                                     <constraint firstItem="gj1-tm-Nhw" firstAttribute="centerY" secondItem="tVZ-8y-VmU" secondAttribute="centerY" id="G04-k9-M2x"/>
+                                    <constraint firstAttribute="trailing" secondItem="ife-w6-hrd" secondAttribute="trailing" constant="20" id="G19-uQ-aRq"/>
+                                    <constraint firstItem="ife-w6-hrd" firstAttribute="leading" secondItem="tVZ-8y-VmU" secondAttribute="leading" constant="20" id="ZFm-lx-bot"/>
+                                    <constraint firstItem="ife-w6-hrd" firstAttribute="centerX" secondItem="tVZ-8y-VmU" secondAttribute="centerX" id="abg-ZQ-kV5"/>
                                     <constraint firstItem="gj1-tm-Nhw" firstAttribute="height" secondItem="tVZ-8y-VmU" secondAttribute="height" id="mjA-gC-aJW"/>
                                     <constraint firstAttribute="height" constant="44" id="rvl-sp-yIE"/>
                                     <constraint firstItem="gj1-tm-Nhw" firstAttribute="width" secondItem="tVZ-8y-VmU" secondAttribute="width" id="wyg-xA-10o"/>
@@ -89,6 +99,7 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="gj1-tm-Nhw" id="ek0-H0-FLy"/>
+                        <outlet property="closeButtonLabel" destination="ife-w6-hrd" id="iYD-J8-341"/>
                         <outlet property="previewImageView" destination="dkb-g6-jP1" id="6Av-6n-SLX"/>
                         <outlet property="progressView" destination="ik6-LV-mq1" id="DP9-fm-fVT"/>
                     </connections>

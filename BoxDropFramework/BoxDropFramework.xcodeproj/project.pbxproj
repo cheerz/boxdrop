@@ -24,6 +24,7 @@
 		B21F69A3210A81080029DC05 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699D210A81070029DC05 /* NunitoSans-Regular.ttf */; };
 		B21F69A4210A81080029DC05 /* NunitoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699E210A81070029DC05 /* NunitoSans-SemiBold.ttf */; };
 		B21F69A5210A81080029DC05 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699F210A81070029DC05 /* Nunito-SemiBold.ttf */; };
+		B24F08AB210A8A9B001163C2 /* UIFont+getCustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24F08AA210A8A9B001163C2 /* UIFont+getCustomFont.swift */; };
 		BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		B21F699D210A81070029DC05 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans-Regular.ttf"; sourceTree = "<group>"; };
 		B21F699E210A81070029DC05 /* NunitoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		B21F699F210A81070029DC05 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		B24F08AA210A8A9B001163C2 /* UIFont+getCustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+getCustomFont.swift"; sourceTree = "<group>"; };
 		BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxDropLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 				9C62F554210A1904002D3754 /* GameScene.sks */,
 				BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */,
 				9C62F550210A18A2002D3754 /* GameScene.swift */,
+				B24F08AC210A8A9F001163C2 /* Extensions */,
 				B21F6992210A6BA90029DC05 /* GameMVP */,
 				9C62F545210A16C3002D3754 /* Info.plist */,
 				9C62F54C210A1758002D3754 /* BoxDropAssets.xcassets */,
@@ -145,6 +148,14 @@
 				B21F699E210A81070029DC05 /* NunitoSans-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		B24F08AC210A8A9F001163C2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B24F08AA210A8A9B001163C2 /* UIFont+getCustomFont.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +279,7 @@
 				9C62F553210A18A2002D3754 /* GameViewController.swift in Sources */,
 				9C62F552210A18A2002D3754 /* GameScene.swift in Sources */,
 				B21F698D210A6A370029DC05 /* GameViewControllerMVP.swift in Sources */,
+				B24F08AB210A8A9B001163C2 /* UIFont+getCustomFont.swift in Sources */,
 				B21F698F210A6B680029DC05 /* GamePresenter.swift in Sources */,
 				BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */,
 				B21F6991210A6B720029DC05 /* GameModel.swift in Sources */,
