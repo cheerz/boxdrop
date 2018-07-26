@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
-    let birdAtlas = SKTextureAtlas(named:"bird")
+    let birdAtlas = SKTextureAtlas(named: "bird")
     var repeatActionBird = SKAction()
     var birdSprites: [SKTexture] = []
     var bird: SKSpriteNode!
