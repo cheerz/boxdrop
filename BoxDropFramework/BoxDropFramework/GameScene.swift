@@ -156,7 +156,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPhysics()
         setupBackgroundColor()
 
-        movingNode = SKNode()
         addChild(movingNode)
         pipes = SKNode()
         movingNode.addChild(pipes)
