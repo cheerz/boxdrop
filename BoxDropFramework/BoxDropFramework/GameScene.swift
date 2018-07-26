@@ -12,33 +12,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let verticalPipeGap = 170.0
 
-    enum BoxTextureName: String {
+    private enum BoxTextureName: String {
         case first = "bird-1"
         case second = "bird-2"
         case third = "bird-3"
         case fourth = "bird-4"
     }
+
+    private struct Texture {
+        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+    }
+
     let boxTextureNames = [BoxTextureName.first.rawValue,
                            BoxTextureName.second.rawValue,
                            BoxTextureName.third.rawValue,
                            BoxTextureName.fourth.rawValue]
 
-    let birdAtlas = SKTextureAtlas(named: "bird")
     var repeatActionBox = SKAction()
     var boxSprites: [SKTexture] = []
-    var bird: SKSpriteNode!
+    var bird = SKSpriteNode()
 
     let skyColor = SKColor(red: 81.0 / 255.0,
                            green: 192.0 / 255.0,
                            blue: 201.0 / 255.0,
                            alpha: 1.0)
-    var pipeTextureUp: SKTexture!
-    var pipeTextureDown: SKTexture!
-    var movePipesAndRemove: SKAction!
+    var pipeTextureUp = SKTexture()
+    var pipeTextureDown = SKTexture()
+    var movePipesAndRemove = SKAction()
     var movingNode = SKNode()
     var pipes = SKNode()
     var canRestart = false
-    var scoreLabelNode: SKLabelNode!
+    var scoreLabelNode = SKLabelNode()
     var score = 0
 
     let birdCategory: UInt32 = 1 << 0
@@ -47,8 +54,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreCategory: UInt32 = 1 << 3
 
     private func setupPhysics() {
-        self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
-        self.physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
+        physicsWorld.contactDelegate = self
     }
 
     private func setupBackgroundColor() {
@@ -56,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createGroundTexture() -> SKTexture {
-        let groundTexture = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        let groundTexture = Texture.land
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
     }
@@ -68,9 +75,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setPipeTextures() {
-        pipeTextureUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        pipeTextureUp = Texture.pipeUp
         pipeTextureUp.filteringMode = .nearest
-        pipeTextureDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        pipeTextureDown = Texture.pipeDown
         pipeTextureDown.filteringMode = .nearest
     }
 
@@ -104,19 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createScene()
     }
 
-    private func createScene() {
-        canRestart = true
-
-        setupPhysics()
-        setupBackgroundColor()
-
-        movingNode = SKNode()
-        addChild(movingNode)
-        pipes = SKNode()
-        movingNode.addChild(pipes)
-
-        // ground
-        let groundTexture = createGroundTexture()
+    private func add(_ groundTexture: SKTexture, to node: SKNode) {
         let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: groundTexture)
 
         for i in 0 ..< 2 + Int(frame.width / (groundTexture.size().width * 2)) {
@@ -126,42 +121,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sprite.position = CGPoint(x: i * sprite.size.width,
                                       y: sprite.size.height / 2.0)
             sprite.run(moveGroundSpritesForever)
-            movingNode.addChild(sprite)
+            node.addChild(sprite)
         }
+    }
 
-        // skyline
-        let skyTexture = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-
+    private func add(_ skyTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
         skyTexture.filteringMode = .nearest
 
         let moveSkySprite = SKAction.moveBy(x: -skyTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * skyTexture.size().width * 2.0))
         let resetSkySprite = SKAction.moveBy(x: skyTexture.size().width * 2.0, y: 0, duration: 0.0)
         let moveSkySpritesForever = SKAction.repeatForever(SKAction.sequence([moveSkySprite, resetSkySprite]))
 
-        for i in 0 ..< 2 + Int(self.frame.size.width / ( skyTexture.size().width * 2 )) {
+        for i in 0 ..< 2 + Int(self.frame.width / ( skyTexture.size().width * 2 )) {
             let i = CGFloat(i)
             let sprite = SKSpriteNode(texture: skyTexture)
             sprite.setScale(2.0)
             sprite.zPosition = -20
             sprite.position = CGPoint(x: i * sprite.size.width, y: sprite.size.height / 2.0 + groundTexture.size().height * 2.0)
             sprite.run(moveSkySpritesForever)
-            movingNode.addChild(sprite)
+            node.addChild(sprite)
         }
+    }
+
+    private func createPipesMovementAction() -> SKAction {
+        let distanceToMove = CGFloat(self.frame.width + 2.0 * pipeTextureUp.size().width)
+        let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
+        let removePipes = SKAction.removeFromParent()
+        return SKAction.sequence([movePipes, removePipes])
+    }
+
+    private func createScene() {
+        canRestart = true
+
+        setupPhysics()
+        setupBackgroundColor()
+
+        addChild(movingNode)
+        pipes = SKNode()
+        movingNode.addChild(pipes)
+
+        let groundTexture = createGroundTexture()
+        add(groundTexture, to: movingNode)
+
+        let skyTexture = Texture.sky
+        add(skyTexture, groundTexture: groundTexture, to: movingNode)
 
         setPipeTextures()
 
-        // create the pipes movement actions
-        let distanceToMove = CGFloat(frame.width + 2.0 * pipeTextureUp.size().width)
-        let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
-        let removePipes = SKAction.removeFromParent()
-        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
+        movePipesAndRemove = createPipesMovementAction()
 
         // spawn the pipes
         let spawn = SKAction.run(spawnPipes)
         let delay = SKAction.wait(forDuration: TimeInterval(2.0))
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
-        self.run(spawnThenDelayForever)
+        run(spawnThenDelayForever)
 
         setBirdsSprites()
         bird = createBird()
@@ -171,7 +185,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // create the ground
         let ground = SKNode()
         ground.position = CGPoint(x: 0, y: groundTexture.size().height)
-        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width, height: groundTexture.size().height * 2.0))
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.size.width,
+                                                               height: groundTexture.size().height * 2.0))
         ground.physicsBody?.isDynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         addChild(ground)
@@ -183,7 +198,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelNode.zPosition = 100
         scoreLabelNode.text = String(score)
         addChild(scoreLabelNode)
-
     }
 
     func spawnPipes() {
@@ -229,7 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func resetScene () {
         // Move bird to original position and reset velocity
-        bird.position = CGPoint(x: self.frame.size.width / 2.5, y: self.frame.midY)
+        bird.position = CGPoint(x: frame.width / 2.5, y: frame.midY)
         bird.physicsBody?.velocity = CGVector( dx: 0, dy: 0 )
         bird.physicsBody?.collisionBitMask = worldCategory | pipeCategory
         bird.speed = 1.0
