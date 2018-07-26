@@ -17,6 +17,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case second = "bird-2"
         case third = "bird-3"
         case fourth = "bird-4"
+
+        var toSKTexture: SKTexture {
+            return SKTexture(image: UIImage(named: rawValue,
+                                            in: Bundle(for: Pute.self),
+                                            compatibleWith: nil)!)
+        }
     }
 
     private struct Texture {
@@ -91,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: Pute.self), compatibleWith: nil)!))
+        bird = SKSpriteNode(texture: BoxTextureName.first.toSKTexture)
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
