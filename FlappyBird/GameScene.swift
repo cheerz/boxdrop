@@ -11,9 +11,20 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
+    enum BoxTextureName: String {
+        case first = "bird-01"
+        case second = "bird-02"
+        case third = "bird-03"
+        case fourth = "bird-04"
+    }
+    let boxTextureNames = [BoxTextureName.first.rawValue,
+                           BoxTextureName.second.rawValue,
+                           BoxTextureName.third.rawValue,
+                           BoxTextureName.fourth.rawValue]
+
     let birdAtlas = SKTextureAtlas(named: "bird")
-    var repeatActionBird = SKAction()
-    var birdSprites: [SKTexture] = []
+    var repeatActionBox = SKAction()
+    var boxSprites: [SKTexture] = []
     var bird: SKSpriteNode!
 
     var skyColor: SKColor!
@@ -61,18 +72,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setBirdsSprites() {
-        let birdTextureNames = ["bird-01", "bird-02", "bird-03", "bird-04"]
-        var birdTextures: [SKTexture] = []
-        birdTextureNames.forEach { name in
-            birdTextures.append(birdAtlas.textureNamed(name))
+        var boxTextures: [SKTexture] = []
+        boxTextureNames.forEach { name in
+            boxTextures.append(birdAtlas.textureNamed(name))
         }
 
-        birdSprites = birdTextures
+        boxSprites = boxTextures
     }
 
     private func createBird() -> SKSpriteNode {
-        let anim = SKAction.animate(with: birdSprites, timePerFrame: 0.2)
-        repeatActionBird = SKAction.repeatForever(anim)
+        let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
+        repeatActionBox = SKAction.repeatForever(anim)
 
         bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
 
@@ -150,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setBirdsSprites()
         bird = createBird()
         addChild(bird)
-        bird.run(repeatActionBird)
+        bird.run(repeatActionBox)
 
         // create the ground
         let ground = SKNode()
