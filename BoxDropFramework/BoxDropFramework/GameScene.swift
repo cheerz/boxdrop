@@ -197,7 +197,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelNode.zPosition = 100
         scoreLabelNode.text = String(score)
         addChild(scoreLabelNode)
-
     }
 
     func spawnPipes() {
@@ -290,7 +289,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // Add a little visual feedback for the score increment
                 scoreLabelNode.run(SKAction.sequence([SKAction.scale(to: 1.5, duration: TimeInterval(0.1)), SKAction.scale(to: 1.0, duration: TimeInterval(0.1))]))
             } else {
-
                 movingNode.speed = 0
 
                 bird.physicsBody?.collisionBitMask = worldCategory
