@@ -29,10 +29,16 @@ class GameScene: SKScene {
     }
 
     private struct Texture {
-        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let sky = textureFrom(name: "sky")
+        static let pipeUp = textureFrom(name: "PipeUp")
+        static let pipeDown = textureFrom(name: "PipeDown")
+        static let land = textureFrom(name: "land")
+
+        static func textureFrom(name: String) -> SKTexture {
+            return SKTexture(image: UIImage(named: name,
+                                            in: Bundle(for: BoxDropLauncher.self),
+                                            compatibleWith: nil)!)
+        }
     }
 
     let boxTextureNames = [BoxTextureName.first.rawValue,
