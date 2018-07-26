@@ -128,23 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    private func createScene() {
-        canRestart = true
-
-        setupPhysics()
-        setupBackgroundColor()
-
-        movingNode = SKNode()
-        addChild(movingNode)
-        pipes = SKNode()
-        movingNode.addChild(pipes)
-
-        let groundTexture = createGroundTexture()
-
-        add(groundTexture, to: movingNode)
-
-        // skyline
-        let skyTexture = Texture.sky
+    private func add(_ skyTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
         skyTexture.filteringMode = .nearest
 
         let moveSkySprite = SKAction.moveBy(x: -skyTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * skyTexture.size().width * 2.0))
@@ -158,8 +142,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sprite.zPosition = -20
             sprite.position = CGPoint(x: i * sprite.size.width, y: sprite.size.height / 2.0 + groundTexture.size().height * 2.0)
             sprite.run(moveSkySpritesForever)
-            movingNode.addChild(sprite)
+            node.addChild(sprite)
         }
+    }
+
+    private func createScene() {
+        canRestart = true
+
+        setupPhysics()
+        setupBackgroundColor()
+
+        movingNode = SKNode()
+        addChild(movingNode)
+        pipes = SKNode()
+        movingNode.addChild(pipes)
+
+        let groundTexture = createGroundTexture()
+        add(groundTexture, to: movingNode)
+
+        let skyTexture = Texture.sky
+        add(skyTexture, groundTexture: groundTexture, to: movingNode)
 
         setPipeTextures()
 
