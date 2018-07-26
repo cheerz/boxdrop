@@ -9,13 +9,20 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    let verticalPipeGap = 150.0
+
+    let verticalPipeGap = 170.0
 
     private enum BoxTextureName: String {
         case first = "cheerzbox-1"
         case second = "cheerzbox-2"
         case third = "cheerzbox-3"
         case fourth = "cheerzbox-4"
+
+        var toSKTexture: SKTexture {
+            return SKTexture(image: UIImage(named: rawValue,
+                                            in: Bundle(for: BoxDropLauncher.self),
+                                            compatibleWith: nil)!)
+        }
     }
 
     private struct Texture {
@@ -90,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "cheerzbox-1", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!))
+        bird = SKSpriteNode(texture: BoxTextureName.first.toSKTexture)
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
@@ -131,7 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let resetSkySprite = SKAction.moveBy(x: skyTexture.size().width * 2.0, y: 0, duration: 0.0)
         let moveSkySpritesForever = SKAction.repeatForever(SKAction.sequence([moveSkySprite, resetSkySprite]))
 
-        for i in 0 ..< 2 + Int(self.frame.size.width / ( skyTexture.size().width * 2 )) {
+        for i in 0 ..< 2 + Int(self.frame.width / ( skyTexture.size().width * 2 )) {
             let i = CGFloat(i)
             let sprite = SKSpriteNode(texture: skyTexture)
             sprite.setScale(2.0)
@@ -143,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createPipesMovementAction() -> SKAction {
-        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
+        let distanceToMove = CGFloat(self.frame.width + 2.0 * pipeTextureUp.size().width)
         let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
         let removePipes = SKAction.removeFromParent()
         return SKAction.sequence([movePipes, removePipes])
@@ -276,7 +283,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
-        bird.zRotation = min( max(-1, value), 0.5 )
+        bird.zRotation = min(max(-1, value), 0.5)
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
