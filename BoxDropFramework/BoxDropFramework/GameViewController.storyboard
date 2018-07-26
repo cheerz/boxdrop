@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HCV-Rl-Rcd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HCV-Rl-Rcd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,13 +19,53 @@
                     <view key="view" contentMode="scaleToFill" id="XH2-iT-OQX" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-uF-8l5">
+                                <rect key="frame" x="37" y="587" width="300" height="60"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cheerzbox-1" translatesAutoresizingMaskIntoConstraints="NO" id="dkb-g6-jP1">
+                                        <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dkb-g6-jP1" secondAttribute="height" multiplier="1:1" id="7nl-RJ-rIy"/>
+                                        </constraints>
+                                    </imageView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ik6-LV-mq1" userLabel="Add">
+                                        <rect key="frame" x="60" y="8" width="232" height="44"/>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92494844543147203" green="0.72653170523032085" blue="0.59916699587164046" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="dkb-g6-jP1" firstAttribute="top" secondItem="fxn-uF-8l5" secondAttribute="top" constant="8" id="DDi-dF-GdZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="ik6-LV-mq1" secondAttribute="trailing" constant="8" id="EwG-TY-VYS"/>
+                                    <constraint firstAttribute="bottom" secondItem="ik6-LV-mq1" secondAttribute="bottom" constant="8" id="Gb3-j0-4zm"/>
+                                    <constraint firstAttribute="bottom" secondItem="dkb-g6-jP1" secondAttribute="bottom" constant="8" id="JPT-0n-wTC"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="top" secondItem="fxn-uF-8l5" secondAttribute="top" constant="8" id="RHe-KH-6E7"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="leading" secondItem="dkb-g6-jP1" secondAttribute="trailing" constant="8" id="n74-h7-ElO"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="centerY" secondItem="fxn-uF-8l5" secondAttribute="centerY" id="rgS-yn-3IN"/>
+                                    <constraint firstItem="dkb-g6-jP1" firstAttribute="leading" secondItem="fxn-uF-8l5" secondAttribute="leading" constant="8" id="yj8-Ni-5ZY"/>
+                                    <constraint firstAttribute="height" constant="60" id="yog-v1-Qa7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fxn-uF-8l5" firstAttribute="width" secondItem="XH2-iT-OQX" secondAttribute="width" multiplier="0.8" id="Ikd-3V-8Of"/>
+                            <constraint firstItem="42S-pn-7ht" firstAttribute="bottom" secondItem="fxn-uF-8l5" secondAttribute="bottom" constant="20" id="LxS-na-BJc"/>
+                            <constraint firstItem="fxn-uF-8l5" firstAttribute="centerX" secondItem="XH2-iT-OQX" secondAttribute="centerX" id="jAW-qA-v3O"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="42S-pn-7ht"/>
                     </view>
+                    <connections>
+                        <outlet property="previewImageView" destination="dkb-g6-jP1" id="6Av-6n-SLX"/>
+                        <outlet property="progressView" destination="ik6-LV-mq1" id="DP9-fm-fVT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYF-e9-1Kz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-343" y="-24"/>
+            <point key="canvasLocation" x="-343.19999999999999" y="-24.7376311844078"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cheerzbox-1" width="35" height="25"/>
+    </resources>
 </document>

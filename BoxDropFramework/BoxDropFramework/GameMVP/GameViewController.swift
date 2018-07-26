@@ -31,8 +31,17 @@ extension SKNode {
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var progressView: UIProgressView!
+
+    var presenter: Game.Presenter?
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        progressView.setProgress(0, animated: false)
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
@@ -48,6 +57,8 @@ class GameViewController: UIViewController {
         }
     }
 
+    // MARK: - Device orientation
+
     override var shouldAutorotate: Bool {
         return true
     }
@@ -58,5 +69,18 @@ class GameViewController: UIViewController {
         } else {
             return UIInterfaceOrientationMask.all
         }
+    }
+}
+
+
+// MARK: - Game.View
+extension GameViewController: Game.View {
+
+    func updateProgressView(value: Float) {
+        progressView.setProgress(value, animated: true)
+    }
+
+    func updatePreview(image: UIImage) {
+        previewImageView.image = image
     }
 }

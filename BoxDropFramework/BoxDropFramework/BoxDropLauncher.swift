@@ -8,9 +8,14 @@ import UIKit
 public class BoxDropLauncher {
 
     public static func startGame(in viewController: UIViewController) {
-        let board = UIStoryboard(name: "GameViewController", bundle: Bundle(for: BoxDropLauncher.self))
-        let vc = board.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .overCurrentContext
-        viewController.present(vc, animated: true)
+        let board = UIStoryboard(name: "GameViewController",
+                                 bundle: Bundle(for: BoxDropLauncher.self))
+        guard let gameViewController = board.instantiateInitialViewController() as? GameViewController else { return }
+        gameViewController.modalPresentationStyle = .overCurrentContext
+
+        let model = GameModel()
+        let presenter = GamePresenter(model: model, view: gameViewController)
+        gameViewController.presenter = presenter
+        viewController.present(gameViewController, animated: true)
     }
 }
