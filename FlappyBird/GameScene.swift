@@ -12,7 +12,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
     let birdAtlas = SKTextureAtlas(named:"bird")
-    var repeatActionbird = SKAction()
+    var repeatActionBird = SKAction()
     var birdSprites: [SKTexture] = []
     var bird: SKSpriteNode!
 
@@ -72,13 +72,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func createBird() -> SKSpriteNode {
         let anim = SKAction.animate(with: birdSprites, timePerFrame: 0.2)
-        repeatActionbird = SKAction.repeatForever(anim)
+        repeatActionBird = SKAction.repeatForever(anim)
 
         bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
-        bird.run(repeatActionbird)
+        bird.run(repeatActionBird)
 
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
         bird.physicsBody?.isDynamic = true
