@@ -326,7 +326,12 @@ extension GameScene: SKPhysicsContactDelegate {
     func flashBackground() {
         self.removeAction(forKey: "flash")
         self.run(SKAction.sequence([SKAction.repeat(SKAction.sequence([SKAction.run({
-            self.backgroundColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
+            self.backgroundColor = SKColor(
+                    red: 254.0 / 255.0,
+                    green: 199.0 / 255.0,
+                    blue: 69.0 / 255.0,
+                    alpha: 1.0
+            )
             }), SKAction.wait(forDuration: TimeInterval(0.05)), SKAction.run({
                 self.backgroundColor = self.skyColor
                 }), SKAction.wait(forDuration: TimeInterval(0.05))]), count: 4), SKAction.run({
