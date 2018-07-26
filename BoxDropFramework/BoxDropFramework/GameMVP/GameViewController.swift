@@ -36,11 +36,13 @@ class GameViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
 
     var presenter: Game.Presenter?
+    private let font = UIFont(name: "Nunito-SemiBold", size: 17)
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
 
         progressView.setProgress(0, animated: false)
 
@@ -70,6 +72,14 @@ class GameViewController: UIViewController {
         } else {
             return UIInterfaceOrientationMask.all
         }
+    }
+
+    // MARK: Setup UI
+
+    func setupUI() {
+        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+        closeButton.titleLabel?.font = font // Font is good on Storyboard but not in Simulator
+        closeButton.setTitle("SKIP", for: .normal)
     }
 
     // MARK: IBAction

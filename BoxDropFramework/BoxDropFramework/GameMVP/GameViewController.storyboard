@@ -11,6 +11,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Nunito-SemiBold.ttf">
+            <string>Nunito-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="juW-ks-xdK">
@@ -20,20 +25,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gj1-tm-Nhw">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVZ-8y-VmU">
                                 <rect key="frame" x="155" y="535" width="64" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.34187040950000003" blue="0.75779565140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gj1-tm-Nhw">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.76862745098039209" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <state key="normal" title="QQQQ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeView:" destination="HCV-Rl-Rcd" eventType="touchUpInside" id="kxI-2h-eoz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="0YQ-C6-VuP"/>
-                                    <constraint firstAttribute="height" constant="44" id="vzC-gy-ZiM"/>
+                                    <constraint firstItem="gj1-tm-Nhw" firstAttribute="centerX" secondItem="tVZ-8y-VmU" secondAttribute="centerX" id="4UZ-vP-jVD"/>
+                                    <constraint firstAttribute="width" constant="64" id="9Em-hv-gtH"/>
+                                    <constraint firstItem="gj1-tm-Nhw" firstAttribute="centerY" secondItem="tVZ-8y-VmU" secondAttribute="centerY" id="G04-k9-M2x"/>
+                                    <constraint firstItem="gj1-tm-Nhw" firstAttribute="height" secondItem="tVZ-8y-VmU" secondAttribute="height" id="mjA-gC-aJW"/>
+                                    <constraint firstAttribute="height" constant="44" id="rvl-sp-yIE"/>
+                                    <constraint firstItem="gj1-tm-Nhw" firstAttribute="width" secondItem="tVZ-8y-VmU" secondAttribute="width" id="wyg-xA-10o"/>
                                 </constraints>
-                                <state key="normal" title="SKIP">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeView:" destination="HCV-Rl-Rcd" eventType="touchUpInside" id="kxI-2h-eoz"/>
-                                </connections>
-                            </button>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-uF-8l5">
                                 <rect key="frame" x="37" y="587" width="300" height="60"/>
                                 <subviews>
@@ -63,10 +79,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fxn-uF-8l5" firstAttribute="top" secondItem="gj1-tm-Nhw" secondAttribute="bottom" constant="8" id="0g6-Ef-sxY"/>
+                            <constraint firstItem="tVZ-8y-VmU" firstAttribute="centerX" secondItem="XH2-iT-OQX" secondAttribute="centerX" id="By5-Rd-aLt"/>
+                            <constraint firstItem="fxn-uF-8l5" firstAttribute="top" secondItem="tVZ-8y-VmU" secondAttribute="bottom" constant="8" id="DsP-1L-NvH"/>
                             <constraint firstItem="fxn-uF-8l5" firstAttribute="width" secondItem="XH2-iT-OQX" secondAttribute="width" multiplier="0.8" id="Ikd-3V-8Of"/>
                             <constraint firstItem="42S-pn-7ht" firstAttribute="bottom" secondItem="fxn-uF-8l5" secondAttribute="bottom" constant="20" id="LxS-na-BJc"/>
-                            <constraint firstItem="gj1-tm-Nhw" firstAttribute="centerX" secondItem="XH2-iT-OQX" secondAttribute="centerX" id="eQR-Fb-Z3A"/>
                             <constraint firstItem="fxn-uF-8l5" firstAttribute="centerX" secondItem="XH2-iT-OQX" secondAttribute="centerX" id="jAW-qA-v3O"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="42S-pn-7ht"/>
@@ -83,6 +99,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cheerzbox-1" width="35" height="25"/>
+        <image name="cheerzbox-1" width="34" height="24"/>
     </resources>
 </document>
