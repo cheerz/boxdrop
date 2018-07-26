@@ -8,10 +8,12 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
 
-    let verticalPipeGap = 170.0
-    let delayBetweenPipes: TimeInterval = 2.0
+    private struct GameSettings {
+        static let verticalPipeGap = 170.0
+        static let delayBetweenPipes: TimeInterval = 2.0
+    }
 
     private enum BoxTextureName: String {
         case first = "cheerzbox-1"
@@ -27,10 +29,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private struct Texture {
-        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
-        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let sky = textureFrom(name: "sky")
+        static let pipeUp = textureFrom(name: "PipeUp")
+        static let pipeDown = textureFrom(name: "PipeDown")
+        static let land = textureFrom(name: "land")
+
+        static func textureFrom(name: String) -> SKTexture {
+            return SKTexture(image: UIImage(named: name,
+                                            in: Bundle(for: BoxDropLauncher.self),
+                                            compatibleWith: nil)!)
+        }
     }
 
     let boxTextureNames = [BoxTextureName.first.rawValue,
@@ -59,6 +67,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if movingNode.speed > 0 {
+            for _ in touches { // do we need all touches?
+                cheerzbox.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                cheerzbox.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+            }
+        } else if canRestart {
+            resetScene()
+        }
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        /* Called before each frame is rendered */
+        let value = cheerzbox.physicsBody!.velocity.dy * ( cheerzbox.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
+        cheerzbox.zRotation = min(max(-1, value), 0.5)
+    }
 
     private func setupPhysics() {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
@@ -178,7 +203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // spawn the pipes
         let spawn = SKAction.run(spawnPipes)
-        let delay = SKAction.wait(forDuration: delayBetweenPipes)
+        let delay = SKAction.wait(forDuration: GameSettings.delayBetweenPipes)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
         run(spawnThenDelayForever)
@@ -206,7 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(scoreLabelNode)
     }
 
-    func spawnPipes() {
+    private func spawnPipes() {
         let pipePair = SKNode()
         pipePair.position = CGPoint( x: self.frame.size.width + pipeTextureUp.size().width * 2, y: 0 )
         pipePair.zPosition = -10
@@ -216,7 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         let pipeDown = SKSpriteNode(texture: pipeTextureDown)
         pipeDown.setScale(2.0)
-        pipeDown.position = CGPoint(x: 0.0, y: y + Double(pipeDown.size.height) + verticalPipeGap)
+        pipeDown.position = CGPoint(x: 0.0, y: y + Double(pipeDown.size.height) + GameSettings.verticalPipeGap)
 
         pipeDown.physicsBody = SKPhysicsBody(rectangleOf: pipeDown.size)
         pipeDown.physicsBody?.isDynamic = false
@@ -247,7 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-    func resetScene () {
+    private func resetScene () {
         // Move bird to original position and reset velocity
         cheerzbox.position = CGPoint(x: frame.width / 2.5, y: frame.midY)
         cheerzbox.physicsBody?.velocity = CGVector( dx: 0, dy: 0 )
@@ -268,23 +293,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Restart animation
         movingNode.speed = 1
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if movingNode.speed > 0 {
-            for _ in touches { // do we need all touches?
-                cheerzbox.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                cheerzbox.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
-            }
-        } else if canRestart {
-            resetScene()
-        }
-    }
-
-    override func update(_ currentTime: TimeInterval) {
-        /* Called before each frame is rendered */
-        let value = cheerzbox.physicsBody!.velocity.dy * ( cheerzbox.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
-        cheerzbox.zRotation = min(max(-1, value), 0.5)
-    }
+}
+extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         if movingNode.speed > 0 {
