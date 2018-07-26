@@ -206,7 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(scoreLabelNode)
     }
 
-    func spawnPipes() {
+    private func spawnPipes() {
         let pipePair = SKNode()
         pipePair.position = CGPoint( x: self.frame.size.width + pipeTextureUp.size().width * 2, y: 0 )
         pipePair.zPosition = -10
@@ -247,7 +247,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-    func resetScene () {
+    private func resetScene () {
         // Move bird to original position and reset velocity
         bird.position = CGPoint(x: frame.width / 2.5, y: frame.midY)
         bird.physicsBody?.velocity = CGVector( dx: 0, dy: 0 )
