@@ -12,7 +12,7 @@ import SpriteKit
 extension SKNode {
     class func unarchiveFromFile(_ file: String) -> SKNode? {
 
-        let path = Bundle(for: Pute.self).path(forResource: file, ofType: "sks")
+        let path = Bundle(for: BoxDropLauncher.self).path(forResource: file, ofType: "sks")
 
         let sceneData: Data?
         do {
@@ -26,18 +26,6 @@ extension SKNode {
         let scene = archiver.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as! GameScene
         archiver.finishDecoding()
         return scene
-    }
-}
-
-public class Pute {
-    
-    public init() {
-        
-    }
-    
-    public func startGame() -> UIViewController {
-        let vc = UIStoryboard(name: "GameViewController", bundle: Bundle(for: Pute.self)).instantiateInitialViewController()!
-        return vc
     }
 }
 

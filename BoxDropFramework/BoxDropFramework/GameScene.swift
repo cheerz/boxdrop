@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createGroundTexture() -> SKTexture {
-        let groundTexture = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        let groundTexture = SKTexture(image: UIImage(named: "land", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
     }
@@ -67,15 +67,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setPipeTextures() {
-        pipeTextureUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        pipeTextureUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         pipeTextureUp.filteringMode = .nearest
-        pipeTextureDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        pipeTextureDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         pipeTextureDown.filteringMode = .nearest
     }
 
     private func setBirdsSprites() {
         boxSprites = boxTextureNames.map {
-            SKTexture(image: UIImage(named: $0, in: Bundle(for: Pute.self), compatibleWith: nil)!)
+            SKTexture(image: UIImage(named: $0, in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         }
     }
 
@@ -83,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: Pute.self), compatibleWith: nil)!))
+        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         // skyline
-        let skyTexture = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        let skyTexture = SKTexture(image: UIImage(named: "sky", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
 
         skyTexture.filteringMode = .nearest
 
