@@ -13,23 +13,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 170.0
 
     private enum BoxTextureName: String {
-        case first = "bird-1"
-        case second = "bird-2"
-        case third = "bird-3"
-        case fourth = "bird-4"
+        case first = "cheerzbox-1"
+        case second = "cheerzbox-2"
+        case third = "cheerzbox-3"
+        case fourth = "cheerzbox-4"
 
         var toSKTexture: SKTexture {
             return SKTexture(image: UIImage(named: rawValue,
-                                            in: Bundle(for: Pute.self),
+                                            in: Bundle(for: BoxDropLauncher.self),
                                             compatibleWith: nil)!)
         }
     }
 
     private struct Texture {
-        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
     }
 
     let boxTextureNames = [BoxTextureName.first.rawValue,
@@ -89,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func setBirdsSprites() {
         boxSprites = boxTextureNames.map {
-            SKTexture(image: UIImage(named: $0, in: Bundle(for: Pute.self), compatibleWith: nil)!)
+            SKTexture(image: UIImage(named: $0, in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         }
     }
 

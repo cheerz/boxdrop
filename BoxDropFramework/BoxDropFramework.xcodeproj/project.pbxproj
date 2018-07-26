@@ -13,6 +13,7 @@
 		9C62F553210A18A2002D3754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62F551210A18A2002D3754 /* GameViewController.swift */; };
 		9C62F555210A1904002D3754 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C62F554210A1904002D3754 /* GameScene.sks */; };
 		9CAFB65C210A21A7002A635E /* BoxDropAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C62F54C210A1758002D3754 /* BoxDropAssets.xcassets */; };
+		BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9C62F550210A18A2002D3754 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9C62F551210A18A2002D3754 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9C62F554210A1904002D3754 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxDropLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				9C45B100210A1E4700C79653 /* GameViewController.storyboard */,
 				9C62F545210A16C3002D3754 /* Info.plist */,
 				9C62F54C210A1758002D3754 /* BoxDropAssets.xcassets */,
+				BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */,
 			);
 			path = BoxDropFramework;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				9C62F553210A18A2002D3754 /* GameViewController.swift in Sources */,
 				9C62F552210A18A2002D3754 /* GameScene.swift in Sources */,
+				BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
