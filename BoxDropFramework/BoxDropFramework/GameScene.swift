@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
 
     let verticalPipeGap = 170.0
     let delayBetweenPipes: TimeInterval = 2.0
@@ -285,6 +285,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
         bird.zRotation = min(max(-1, value), 0.5)
     }
+}
+
+// MARK: - SKPhysicsContactDelegate
+extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         if movingNode.speed > 0 {
@@ -308,11 +312,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.removeAction(forKey: "flash")
                 self.run(SKAction.sequence([SKAction.repeat(SKAction.sequence([SKAction.run({
                     self.backgroundColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
-                    }), SKAction.wait(forDuration: TimeInterval(0.05)), SKAction.run({
-                        self.backgroundColor = self.skyColor
-                        }), SKAction.wait(forDuration: TimeInterval(0.05))]), count: 4), SKAction.run({
-                            self.canRestart = true
-                            })]), withKey: "flash")
+                }), SKAction.wait(forDuration: TimeInterval(0.05)), SKAction.run({
+                    self.backgroundColor = self.skyColor
+                }), SKAction.wait(forDuration: TimeInterval(0.05))]), count: 4), SKAction.run({
+                    self.canRestart = true
+                })]), withKey: "flash")
             }
         }
     }
