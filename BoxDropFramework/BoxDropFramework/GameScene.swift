@@ -12,10 +12,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
     private enum BoxTextureName: String {
-        case first = "bird-1"
-        case second = "bird-2"
-        case third = "bird-3"
-        case fourth = "bird-4"
+        case first = "cheerzbox-1"
+        case second = "cheerzbox-2"
+        case third = "cheerzbox-3"
+        case fourth = "cheerzbox-4"
     }
 
     private struct Texture {
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!))
+        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "cheerzbox-1", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
