@@ -60,6 +60,23 @@ class GameScene: SKScene {
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if movingNode.speed > 0 {
+            for _ in touches { // do we need all touches?
+                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+            }
+        } else if canRestart {
+            resetScene()
+        }
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        /* Called before each frame is rendered */
+        let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
+        bird.zRotation = min(max(-1, value), 0.5)
+    }
+
     private func setupPhysics() {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
         physicsWorld.contactDelegate = self
@@ -267,23 +284,6 @@ class GameScene: SKScene {
 
         // Restart animation
         movingNode.speed = 1
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if movingNode.speed > 0 {
-            for _ in touches { // do we need all touches?
-                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
-            }
-        } else if canRestart {
-            resetScene()
-        }
-    }
-
-    override func update(_ currentTime: TimeInterval) {
-        /* Called before each frame is rendered */
-        let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
-        bird.zRotation = min(max(-1, value), 0.5)
     }
 }
 
