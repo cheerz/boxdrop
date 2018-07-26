@@ -78,7 +78,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
-        bird.run(repeatActionBird)
 
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
         bird.physicsBody?.isDynamic = true
@@ -151,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setBirdsSprites()
         bird = createBird()
         addChild(bird)
+        bird.run(repeatActionBird)
 
         // create the ground
         let ground = SKNode()
@@ -232,6 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Restart animation
         moving.speed = 1
     }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if moving.speed > 0 {
             for _ in touches { // do we need all touches?
@@ -263,7 +264,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 moving.speed = 0
 
                 bird.physicsBody?.collisionBitMask = worldCategory
-                bird.run(  SKAction.rotate(byAngle: CGFloat(Double.pi) * CGFloat(bird.position.y) * 0.01, duration: 1), completion: {self.bird.speed = 0 })
+                bird.run(SKAction.rotate(byAngle: CGFloat.pi * CGFloat(bird.position.y) * 0.01, duration: 0),
+                         completion: {
+                            self.bird.speed = 0
+                })
 
                 // Flash background if contact is detected
                 self.removeAction(forKey: "flash")
