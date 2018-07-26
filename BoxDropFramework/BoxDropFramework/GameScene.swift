@@ -50,9 +50,9 @@ class GameScene: SKScene {
     var boxSprites: [SKTexture] = []
     var cheerzbox = SKSpriteNode()
 
-    let skyColor = SKColor(red: 81.0 / 255.0,
+    let skyColor = SKColor(red: 85.0 / 255.0,
                            green: 192.0 / 255.0,
-                           blue: 201.0 / 255.0,
+                           blue: 212.0 / 255.0,
                            alpha: 1.0)
     var pipeTextureUp = SKTexture()
     var pipeTextureDown = SKTexture()
@@ -157,20 +157,20 @@ class GameScene: SKScene {
         }
     }
 
-    private func add(_ skyTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
-        skyTexture.filteringMode = .nearest
+    private func add(_ bushTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
+        bushTexture.filteringMode = .nearest
 
-        let moveSkySprite = SKAction.moveBy(x: -skyTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * skyTexture.size().width * 2.0))
-        let resetSkySprite = SKAction.moveBy(x: skyTexture.size().width * 2.0, y: 0, duration: 0.0)
-        let moveSkySpritesForever = SKAction.repeatForever(SKAction.sequence([moveSkySprite, resetSkySprite]))
+        let moveBushSprite = SKAction.moveBy(x: -bushTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * bushTexture.size().width * 2.0))
+        let resetBushSprite = SKAction.moveBy(x: bushTexture.size().width * 2.0, y: 0, duration: 0.0)
+        let moveBushSpritesForever = SKAction.repeatForever(SKAction.sequence([moveBushSprite, resetBushSprite]))
 
-        for i in 0 ..< 2 + Int(self.frame.width / ( skyTexture.size().width * 2 )) {
+        for i in 0 ..< 2 + Int(self.frame.width / ( bushTexture.size().width * 2 )) {
             let i = CGFloat(i)
-            let sprite = SKSpriteNode(texture: skyTexture)
+            let sprite = SKSpriteNode(texture: bushTexture)
             sprite.setScale(2.0)
             sprite.zPosition = -20
             sprite.position = CGPoint(x: i * sprite.size.width, y: sprite.size.height / 2.0 + groundTexture.size().height * 2.0)
-            sprite.run(moveSkySpritesForever)
+            sprite.run(moveBushSpritesForever)
             node.addChild(sprite)
         }
     }
