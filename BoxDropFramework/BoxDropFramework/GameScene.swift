@@ -12,10 +12,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
     enum BoxTextureName: String {
-        case first = "bird-01"
-        case second = "bird-02"
-        case third = "bird-03"
-        case fourth = "bird-04"
+        case first = "bird-1"
+        case second = "bird-2"
+        case third = "bird-3"
+        case fourth = "bird-4"
     }
     let boxTextureNames = [BoxTextureName.first.rawValue,
                            BoxTextureName.second.rawValue,
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createGroundTexture() -> SKTexture {
-        let groundTexture = SKTexture(imageNamed: "land")
+        let groundTexture = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
     }
@@ -67,26 +67,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setPipeTextures() {
-        pipeTextureUp = SKTexture(imageNamed: "PipeUp")
+        pipeTextureUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
         pipeTextureUp.filteringMode = .nearest
-        pipeTextureDown = SKTexture(imageNamed: "PipeDown")
+        pipeTextureDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
         pipeTextureDown.filteringMode = .nearest
     }
 
     private func setBirdsSprites() {
-        var boxTextures: [SKTexture] = []
-        boxTextureNames.forEach { name in
-            boxTextures.append(birdAtlas.textureNamed(name))
+        boxSprites = boxTextureNames.map {
+            SKTexture(image: UIImage(named: $0, in: Bundle(for: Pute.self), compatibleWith: nil)!)
         }
-
-        boxSprites = boxTextures
     }
 
     private func createBird() -> SKSpriteNode {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
+        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: Pute.self), compatibleWith: nil)!))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
@@ -132,7 +129,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         // skyline
-        let skyTexture = SKTexture(imageNamed: "sky")
+        let skyTexture = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+
         skyTexture.filteringMode = .nearest
 
         let moveSkySprite = SKAction.moveBy(x: -skyTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * skyTexture.size().width * 2.0))
