@@ -27,17 +27,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
 
-    override func didMove(to view: SKView) {
+    private func createBirdsTextures() -> [SKTexture] {
+        let birdTextureNames = ["bird-01", "bird-02", "bird-03", "bird-04"]
+        let birdTextures: [SKTexture] = birdTextureNames.map { name in
+            let birdTexture = SKTexture(imageNamed: name)
+            birdTexture.filteringMode = .nearest
+            return birdTexture
+        }
 
-        canRestart = true
+        return birdTextures
+    }
 
-        // setup physics
+    private func setupPhysics() {
         self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
         self.physicsWorld.contactDelegate = self
+    }
 
-        // setup background color
+    private func setupBackgroundColor() {
         skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
+    }
+
+    override func didMove(to view: SKView) {
+        canRestart = true
+
+        setupPhysics()
+        setupBackgroundColor()
 
         moving = SKNode()
         self.addChild(moving)
@@ -99,12 +114,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(spawnThenDelayForever)
 
         // setup our bird
-        let birdTexture1 = SKTexture(imageNamed: "bird-01")
-        birdTexture1.filteringMode = .nearest
-        let birdTexture2 = SKTexture(imageNamed: "bird-02")
-        birdTexture2.filteringMode = .nearest
+        let birdTextures: [SKTexture] = createBirdsTextures()
 
-        let anim = SKAction.animate(with: [birdTexture1, birdTexture2], timePerFrame: 0.2)
+        guard let birdTexture1 = birdTextures.first else { return }
+
+        let anim = SKAction.animate(with: birdTextures, timePerFrame: 0.2)
         let flap = SKAction.repeatForever(anim)
 
         bird = SKSpriteNode(texture: birdTexture1)
