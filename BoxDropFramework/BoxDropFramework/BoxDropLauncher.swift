@@ -7,10 +7,10 @@ import UIKit
 
 public class BoxDropLauncher {
 
-    public static func startGame(in view: UIViewController) {
+    public static func startGame(in viewController: UIViewController) {
         let board = UIStoryboard(name: "GameViewController", bundle: Bundle(for: BoxDropLauncher.self))
         let vc = board.instantiateInitialViewController()!
         vc.modalPresentationStyle = .overCurrentContext
-        view.present(vc, animated: true)
+        viewController.present(vc, animated: true)
     }
 }
