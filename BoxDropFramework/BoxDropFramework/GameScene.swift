@@ -30,8 +30,8 @@ class GameScene: SKScene {
 
     private struct Texture {
         static let sky = textureFrom(name: "sky")
-        static let pipeUp = textureFrom(name: "PipeUp")
-        static let pipeDown = textureFrom(name: "PipeDown")
+        static let pipeUp = textureFrom(name: "pipe")
+        static let pipeDown = textureFrom(name: "pipe")
         static let land = textureFrom(name: "land")
 
         static func textureFrom(name: String) -> SKTexture {
