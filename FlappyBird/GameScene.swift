@@ -11,12 +11,20 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
-    enum BoxTextureName: String {
+    private enum BoxTextureName: String {
         case first = "bird-01"
         case second = "bird-02"
         case third = "bird-03"
         case fourth = "bird-04"
     }
+
+    private struct Texture {
+        static let sky = SKTexture(imageNamed: "sky")
+        static let pipeUp = SKTexture(imageNamed: "PipeUp")
+        static let pipeDown = SKTexture(imageNamed: "PipeDown")
+        static let land = SKTexture(imageNamed: "land")
+    }
+
     let boxTextureNames = [BoxTextureName.first.rawValue,
                            BoxTextureName.second.rawValue,
                            BoxTextureName.third.rawValue,
@@ -55,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createGroundTexture() -> SKTexture {
-        let groundTexture = SKTexture(imageNamed: "land")
+        let groundTexture = Texture.land
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
     }
@@ -67,9 +75,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setPipeTextures() {
-        pipeTextureUp = SKTexture(imageNamed: "PipeUp")
+        pipeTextureUp = Texture.pipeUp
         pipeTextureUp.filteringMode = .nearest
-        pipeTextureDown = SKTexture(imageNamed: "PipeDown")
+        pipeTextureDown = Texture.pipeDown
         pipeTextureDown.filteringMode = .nearest
     }
 
@@ -106,6 +114,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createScene()
     }
 
+    private func add(_ groundTexture: SKTexture, to node: SKNode) {
+        let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: groundTexture)
+
+        for i in 0 ..< 2 + Int(frame.width / (groundTexture.size().width * 2)) {
+            let i = CGFloat(i)
+            let sprite = SKSpriteNode(texture: groundTexture)
+            sprite.setScale(2.0)
+            sprite.position = CGPoint(x: i * sprite.size.width,
+                                      y: sprite.size.height / 2.0)
+            sprite.run(moveGroundSpritesForever)
+            node.addChild(sprite)
+        }
+    }
+
     private func createScene() {
         canRestart = true
 
@@ -117,22 +139,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pipes = SKNode()
         movingNode.addChild(pipes)
 
-        // ground
         let groundTexture = createGroundTexture()
-        let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: groundTexture)
 
-        for i in 0 ..< 2 + Int(frame.width / (groundTexture.size().width * 2)) {
-            let i = CGFloat(i)
-            let sprite = SKSpriteNode(texture: groundTexture)
-            sprite.setScale(2.0)
-            sprite.position = CGPoint(x: i * sprite.size.width,
-                                      y: sprite.size.height / 2.0)
-            sprite.run(moveGroundSpritesForever)
-            movingNode.addChild(sprite)
-        }
+        add(groundTexture, to: movingNode)
 
         // skyline
-        let skyTexture = SKTexture(imageNamed: "sky")
+        let skyTexture = Texture.sky
         skyTexture.filteringMode = .nearest
 
         let moveSkySprite = SKAction.moveBy(x: -skyTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * skyTexture.size().width * 2.0))
