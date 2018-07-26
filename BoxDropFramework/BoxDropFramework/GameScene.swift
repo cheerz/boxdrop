@@ -38,7 +38,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createGroundTexture() -> SKTexture {
-//        let groundTexture = SKTexture(imageNamed: "land")
         let groundTexture = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
