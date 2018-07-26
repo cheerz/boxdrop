@@ -19,10 +19,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private struct Texture {
-        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: Pute.self), compatibleWith: nil)!)
-        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: Pute.self), compatibleWith: nil)!)
+        static let sky = SKTexture(image: UIImage(named: "sky", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let pipeUp = SKTexture(image: UIImage(named: "PipeUp", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let pipeDown = SKTexture(image: UIImage(named: "PipeDown", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
+        static let land = SKTexture(image: UIImage(named: "land", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
     }
 
     let boxTextureNames = [BoxTextureName.first.rawValue,
@@ -82,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func setBirdsSprites() {
         boxSprites = boxTextureNames.map {
-            SKTexture(image: UIImage(named: $0, in: Bundle(for: Pute.self), compatibleWith: nil)!)
+            SKTexture(image: UIImage(named: $0, in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!)
         }
     }
 
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "cheerzbox-1", in: Bundle(for: Pute.self), compatibleWith: nil)!))
+        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "cheerzbox-1", in: Bundle(for: BoxDropLauncher.self), compatibleWith: nil)!))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
