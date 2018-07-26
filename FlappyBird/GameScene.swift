@@ -94,7 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
+        bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed(BoxTextureName.first.rawValue))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
