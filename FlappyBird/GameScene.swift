@@ -179,7 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let delay = SKAction.wait(forDuration: TimeInterval(2.0))
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
-        self.run(spawnThenDelayForever)
+        run(spawnThenDelayForever)
 
         setBirdsSprites()
         bird = createBird()
@@ -189,7 +189,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // create the ground
         let ground = SKNode()
         ground.position = CGPoint(x: 0, y: groundTexture.size().height)
-        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width, height: groundTexture.size().height * 2.0))
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.size.width,
+                                                               height: groundTexture.size().height * 2.0))
         ground.physicsBody?.isDynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         addChild(ground)
