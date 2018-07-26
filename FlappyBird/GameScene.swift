@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         bird = SKSpriteNode(texture: birdTexture1)
         bird.setScale(2.0)
-        bird.position = CGPoint(x: self.frame.size.width * 0.35, y: self.frame.size.height * 0.6)
+        bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
         bird.run(flap)
 
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
