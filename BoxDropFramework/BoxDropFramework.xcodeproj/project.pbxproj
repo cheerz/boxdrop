@@ -94,7 +94,6 @@
 				BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */,
 				9C62F550210A18A2002D3754 /* GameScene.swift */,
 				B21F6992210A6BA90029DC05 /* GameMVP */,
-				9C45B100210A1E4700C79653 /* GameViewController.storyboard */,
 				9C62F545210A16C3002D3754 /* Info.plist */,
 				9C62F54C210A1758002D3754 /* BoxDropAssets.xcassets */,
 			);
@@ -117,6 +116,7 @@
 				9C62F551210A18A2002D3754 /* GameViewController.swift */,
 				B21F698E210A6B680029DC05 /* GamePresenter.swift */,
 				B21F6990210A6B720029DC05 /* GameModel.swift */,
+				9C45B100210A1E4700C79653 /* GameViewController.storyboard */,
 			);
 			path = GameMVP;
 			sourceTree = "<group>";
