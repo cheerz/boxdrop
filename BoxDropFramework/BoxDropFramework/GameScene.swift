@@ -30,7 +30,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                            BoxTextureName.third.rawValue,
                            BoxTextureName.fourth.rawValue]
 
-    let birdAtlas = SKTextureAtlas(named: "bird")
     var repeatActionBox = SKAction()
     var boxSprites: [SKTexture] = []
     var bird = SKSpriteNode()
