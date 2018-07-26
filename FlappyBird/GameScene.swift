@@ -27,13 +27,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var boxSprites: [SKTexture] = []
     var bird: SKSpriteNode!
 
-    var skyColor: SKColor!
+    let skyColor = SKColor(red: 81.0 / 255.0,
+                           green: 192.0 / 255.0,
+                           blue: 201.0 / 255.0,
+                           alpha: 1.0)
     var pipeTextureUp: SKTexture!
     var pipeTextureDown: SKTexture!
     var movePipesAndRemove: SKAction!
     var moving: SKNode!
     var pipes: SKNode!
-    var canRestart = Bool()
+    var canRestart = false
     var scoreLabelNode: SKLabelNode!
     var score = NSInteger()
 
@@ -48,8 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setupBackgroundColor() {
-        skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
-        self.backgroundColor = skyColor
+        backgroundColor = skyColor
     }
 
     private func createGroundTexture() -> SKTexture {
@@ -250,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
             }
         } else if canRestart {
-            self.resetScene()
+            resetScene()
         }
     }
 
