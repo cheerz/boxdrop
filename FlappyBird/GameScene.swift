@@ -33,19 +33,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let birdAtlas = SKTextureAtlas(named: "bird")
     var repeatActionBox = SKAction()
     var boxSprites: [SKTexture] = []
-    var bird: SKSpriteNode!
+    var bird = SKSpriteNode()
 
     let skyColor = SKColor(red: 81.0 / 255.0,
                            green: 192.0 / 255.0,
                            blue: 201.0 / 255.0,
                            alpha: 1.0)
-    var pipeTextureUp: SKTexture!
-    var pipeTextureDown: SKTexture!
-    var movePipesAndRemove: SKAction!
+    var pipeTextureUp = SKTexture()
+    var pipeTextureDown = SKTexture()
+    var movePipesAndRemove = SKAction()
     var movingNode = SKNode()
     var pipes = SKNode()
     var canRestart = false
-    var scoreLabelNode: SKLabelNode!
+    var scoreLabelNode = SKLabelNode()
     var score = 0
 
     let birdCategory: UInt32 = 1 << 0
@@ -54,8 +54,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreCategory: UInt32 = 1 << 3
 
     private func setupPhysics() {
-        self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
-        self.physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
+        physicsWorld.contactDelegate = self
     }
 
     private func setupBackgroundColor() {
