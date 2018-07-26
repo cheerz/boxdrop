@@ -12,10 +12,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
     enum BoxTextureName: String {
-        case first = "bird-01"
-        case second = "bird-02"
-        case third = "bird-03"
-        case fourth = "bird-04"
+        case first = "bird-1"
+        case second = "bird-2"
+        case third = "bird-3"
+        case fourth = "bird-4"
     }
     let boxTextureNames = [BoxTextureName.first.rawValue,
                            BoxTextureName.second.rawValue,
@@ -74,19 +74,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setBirdsSprites() {
-        var boxTextures: [SKTexture] = []
-        boxTextureNames.forEach { name in
-            boxTextures.append(birdAtlas.textureNamed(name))
+        boxSprites = boxTextureNames.map {
+            SKTexture(image: UIImage(named: $0, in: Bundle(for: Pute.self), compatibleWith: nil)!)
         }
-
-        boxSprites = boxTextures
     }
 
     private func createBird() -> SKSpriteNode {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
-        bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
+        bird = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bird-1", in: Bundle(for: Pute.self), compatibleWith: nil)!))
 
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
