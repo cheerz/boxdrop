@@ -38,16 +38,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return birdTextures
     }
 
+    private func setupPhysics() {
+        self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
+        self.physicsWorld.contactDelegate = self
+    }
+
+    private func setupBackgroundColor() {
+        skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
+        self.backgroundColor = skyColor
+    }
+
     override func didMove(to view: SKView) {
         canRestart = true
 
-        // setup physics
-        self.physicsWorld.gravity = CGVector( dx: 0.0, dy: -5.0 )
-        self.physicsWorld.contactDelegate = self
-
-        // setup background color
-        skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
-        self.backgroundColor = skyColor
+        setupPhysics()
+        setupBackgroundColor()
 
         moving = SKNode()
         self.addChild(moving)
