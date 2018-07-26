@@ -48,6 +48,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = skyColor
     }
 
+    private func createGroundTexture() -> SKTexture {
+        let groundTexture = SKTexture(imageNamed: "land")
+        groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
+        return groundTexture
+    }
+
+    private func createMoveGroundSpritesForever(groundTexture: SKTexture) -> SKAction {
+        let moveGroundSprite = SKAction.moveBy(x: -groundTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.02 * groundTexture.size().width * 2.0))
+        let resetGroundSprite = SKAction.moveBy(x: groundTexture.size().width * 2.0, y: 0, duration: 0.0)
+        return SKAction.repeatForever(SKAction.sequence([moveGroundSprite, resetGroundSprite]))
+    }
+
     override func didMove(to view: SKView) {
         canRestart = true
 
@@ -60,12 +72,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moving.addChild(pipes)
 
         // ground
-        let groundTexture = SKTexture(imageNamed: "land")
-        groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
-
-        let moveGroundSprite = SKAction.moveBy(x: -groundTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.02 * groundTexture.size().width * 2.0))
-        let resetGroundSprite = SKAction.moveBy(x: groundTexture.size().width * 2.0, y: 0, duration: 0.0)
-        let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite, resetGroundSprite]))
+        let groundTexture = createGroundTexture()
+        let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: groundTexture)
 
         for i in 0 ..< 2 + Int(self.frame.size.width / ( groundTexture.size().width * 2 )) {
             let i = CGFloat(i)
