@@ -13,8 +13,20 @@
 		9C62F553210A18A2002D3754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62F551210A18A2002D3754 /* GameViewController.swift */; };
 		9C62F555210A1904002D3754 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C62F554210A1904002D3754 /* GameScene.sks */; };
 		9CAFB65C210A21A7002A635E /* BoxDropAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C62F54C210A1758002D3754 /* BoxDropAssets.xcassets */; };
+		B21F6981210A53330029DC05 /* BoxDropFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F6980210A53330029DC05 /* BoxDropFrameworkTests.swift */; };
+		B21F6983210A53330029DC05 /* BoxDropFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C62F541210A16C3002D3754 /* BoxDropFramework.framework */; };
 		BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B21F6984210A53330029DC05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C62F538210A16C3002D3754 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C62F540210A16C3002D3754;
+			remoteInfo = BoxDropFramework;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9C45B100210A1E4700C79653 /* GameViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameViewController.storyboard; sourceTree = "<group>"; };
@@ -25,6 +37,9 @@
 		9C62F550210A18A2002D3754 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9C62F551210A18A2002D3754 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9C62F554210A1904002D3754 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B21F697E210A53320029DC05 /* BoxDropFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxDropFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B21F6980210A53330029DC05 /* BoxDropFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDropFrameworkTests.swift; sourceTree = "<group>"; };
+		B21F6982210A53330029DC05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxDropLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,6 +51,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B21F697B210A53320029DC05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B21F6983210A53330029DC05 /* BoxDropFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -43,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				9C62F543210A16C3002D3754 /* BoxDropFramework */,
+				B21F697F210A53330029DC05 /* BoxDropFrameworkTests */,
 				9C62F542210A16C3002D3754 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				9C62F541210A16C3002D3754 /* BoxDropFramework.framework */,
+				B21F697E210A53320029DC05 /* BoxDropFrameworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,6 +93,15 @@
 				BF8F46AA1E94CBAE599DA780 /* BoxDropLauncher.swift */,
 			);
 			path = BoxDropFramework;
+			sourceTree = "<group>";
+		};
+		B21F697F210A53330029DC05 /* BoxDropFrameworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				B21F6980210A53330029DC05 /* BoxDropFrameworkTests.swift */,
+				B21F6982210A53330029DC05 /* Info.plist */,
+			);
+			path = BoxDropFrameworkTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,18 +136,40 @@
 			productReference = 9C62F541210A16C3002D3754 /* BoxDropFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		B21F697D210A53320029DC05 /* BoxDropFrameworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B21F6988210A53330029DC05 /* Build configuration list for PBXNativeTarget "BoxDropFrameworkTests" */;
+			buildPhases = (
+				B21F697A210A53320029DC05 /* Sources */,
+				B21F697B210A53320029DC05 /* Frameworks */,
+				B21F697C210A53320029DC05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B21F6985210A53330029DC05 /* PBXTargetDependency */,
+			);
+			name = BoxDropFrameworkTests;
+			productName = BoxDropFrameworkTests;
+			productReference = B21F697E210A53320029DC05 /* BoxDropFrameworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		9C62F538210A16C3002D3754 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = maxime;
 				TargetAttributes = {
 					9C62F540210A16C3002D3754 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
+					};
+					B21F697D210A53320029DC05 = {
+						CreatedOnToolsVersion = 9.4.1;
 					};
 				};
 			};
@@ -130,6 +186,7 @@
 			projectRoot = "";
 			targets = (
 				9C62F540210A16C3002D3754 /* BoxDropFramework */,
+				B21F697D210A53320029DC05 /* BoxDropFrameworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -142,6 +199,13 @@
 				9C45B101210A1E4700C79653 /* GameViewController.storyboard in Resources */,
 				9C62F555210A1904002D3754 /* GameScene.sks in Resources */,
 				9CAFB65C210A21A7002A635E /* BoxDropAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B21F697C210A53320029DC05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +222,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B21F697A210A53320029DC05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B21F6981210A53330029DC05 /* BoxDropFrameworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B21F6985210A53330029DC05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C62F540210A16C3002D3754 /* BoxDropFramework */;
+			targetProxy = B21F6984210A53330029DC05 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9C62F547210A16C3002D3754 /* Debug */ = {
@@ -334,6 +414,44 @@
 			};
 			name = Release;
 		};
+		B21F6986210A53330029DC05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FMW43WX3AR;
+				INFOPLIST_FILE = BoxDropFrameworkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheerz.BoxDropFrameworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B21F6987210A53330029DC05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FMW43WX3AR;
+				INFOPLIST_FILE = BoxDropFrameworkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheerz.BoxDropFrameworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -351,6 +469,15 @@
 			buildConfigurations = (
 				9C62F54A210A16C3002D3754 /* Debug */,
 				9C62F54B210A16C3002D3754 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B21F6988210A53330029DC05 /* Build configuration list for PBXNativeTarget "BoxDropFrameworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B21F6986210A53330029DC05 /* Debug */,
+				B21F6987210A53330029DC05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
