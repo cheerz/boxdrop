@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pipes: SKNode!
     var canRestart = false
     var scoreLabelNode: SKLabelNode!
-    var score = NSInteger()
+    var score = 0
 
     let birdCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -103,6 +103,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didMove(to view: SKView) {
+        createScene()
+    }
+
+    private func createScene() {
         canRestart = true
 
         setupPhysics()
