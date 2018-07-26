@@ -9,7 +9,8 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    let verticalPipeGap = 150.0
+
+    let verticalPipeGap = 170.0
 
     enum BoxTextureName: String {
         case first = "bird-1"
@@ -150,7 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setPipeTextures()
 
         // create the pipes movement actions
-        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
+        let distanceToMove = CGFloat(frame.width + 2.0 * pipeTextureUp.size().width)
         let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
         let removePipes = SKAction.removeFromParent()
         movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
@@ -262,7 +263,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
-        bird.zRotation = min( max(-1, value), 0.5 )
+        bird.zRotation = min(max(-1, value), 0.5)
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
@@ -275,7 +276,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // Add a little visual feedback for the score increment
                 scoreLabelNode.run(SKAction.sequence([SKAction.scale(to: 1.5, duration: TimeInterval(0.1)), SKAction.scale(to: 1.0, duration: TimeInterval(0.1))]))
             } else {
-
                 movingNode.speed = 0
 
                 bird.physicsBody?.collisionBitMask = worldCategory
