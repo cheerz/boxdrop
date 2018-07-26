@@ -163,7 +163,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupBackgroundColor()
 
         addChild(movingNode)
-        pipes = SKNode()
         movingNode.addChild(pipes)
 
         let groundTexture = createGroundTexture()
