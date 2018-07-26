@@ -29,7 +29,7 @@ class GameScene: SKScene {
     }
 
     private struct Texture {
-        static let sky = textureFrom(name: "sky")
+        static let bush = textureFrom(name: "bush")
         static let pipeUp = textureFrom(name: "pipe")
         static let pipeDown = textureFrom(name: "pipe")
         static let land = textureFrom(name: "land")
@@ -194,7 +194,7 @@ class GameScene: SKScene {
         let groundTexture = createGroundTexture()
         add(groundTexture, to: movingNode)
 
-        let skyTexture = Texture.sky
+        let skyTexture = Texture.bush
         add(skyTexture, groundTexture: groundTexture, to: movingNode)
 
         setPipeTextures()
