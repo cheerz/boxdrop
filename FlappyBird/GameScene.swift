@@ -11,9 +11,11 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let verticalPipeGap = 150.0
 
-    let birdAtlas = SKTextureAtlas(named:"bird")
-
+    let birdAtlas = SKTextureAtlas(named: "bird")
+    var repeatActionBird = SKAction()
+    var birdSprites: [SKTexture] = []
     var bird: SKSpriteNode!
+
     var skyColor: SKColor!
     var pipeTextureUp: SKTexture!
     var pipeTextureDown: SKTexture!
@@ -58,28 +60,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pipeTextureDown.filteringMode = .nearest
     }
 
-    private func createBirdsTextures() -> [SKTexture] {
+    private func setBirdsSprites() {
         let birdTextureNames = ["bird-01", "bird-02", "bird-03", "bird-04"]
         var birdTextures: [SKTexture] = []
         birdTextureNames.forEach { name in
             birdTextures.append(birdAtlas.textureNamed(name))
         }
 
-        return birdTextures
+        birdSprites = birdTextures
     }
 
-    private func setupBird() {
-        let birdTextures: [SKTexture] = createBirdsTextures()
+    private func createBird() -> SKSpriteNode {
+        let anim = SKAction.animate(with: birdSprites, timePerFrame: 0.2)
+        repeatActionBird = SKAction.repeatForever(anim)
 
-        guard let birdTexture1 = birdTextures.first else { return }
+        bird = SKSpriteNode(texture: SKTextureAtlas(named: "bird").textureNamed("bird-01"))
 
-        let anim = SKAction.animate(with: birdTextures, timePerFrame: 0.2)
-        let flap = SKAction.repeatForever(anim)
-
-        bird = SKSpriteNode(texture: birdTexture1)
         bird.setScale(2.0)
         bird.position = CGPoint(x: frame.width * 0.35, y: frame.height * 0.6)
-        bird.run(flap)
 
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
         bird.physicsBody?.isDynamic = true
@@ -89,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bird.physicsBody?.collisionBitMask = worldCategory | pipeCategory
         bird.physicsBody?.contactTestBitMask = worldCategory | pipeCategory
 
-        self.addChild(bird)
+        return bird
     }
 
     override func didMove(to view: SKView) {
@@ -149,7 +147,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
         self.run(spawnThenDelayForever)
 
-        setupBird()
+        setBirdsSprites()
+        bird = createBird()
+        addChild(bird)
+        bird.run(repeatActionBird)
 
         // create the ground
         let ground = SKNode()
@@ -231,6 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Restart animation
         moving.speed = 1
     }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if moving.speed > 0 {
             for _ in touches { // do we need all touches?
@@ -262,7 +264,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 moving.speed = 0
 
                 bird.physicsBody?.collisionBitMask = worldCategory
-                bird.run(  SKAction.rotate(byAngle: CGFloat(Double.pi) * CGFloat(bird.position.y) * 0.01, duration: 1), completion: {self.bird.speed = 0 })
+                bird.run(SKAction.rotate(byAngle: CGFloat.pi * CGFloat(bird.position.y) * 0.01, duration: 0),
+                         completion: {
+                            self.bird.speed = 0
+                })
 
                 // Flash background if contact is detected
                 self.removeAction(forKey: "flash")
