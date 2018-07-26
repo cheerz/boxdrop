@@ -146,6 +146,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
+    private func createPipesMovementAction() -> SKAction {
+        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
+        let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
+        let removePipes = SKAction.removeFromParent()
+        return SKAction.sequence([movePipes, removePipes])
+    }
+
     private func createScene() {
         canRestart = true
 
@@ -165,11 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         setPipeTextures()
 
-        // create the pipes movement actions
-        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
-        let movePipes = SKAction.moveBy(x: -distanceToMove, y: 0.0, duration: TimeInterval(0.01 * distanceToMove))
-        let removePipes = SKAction.removeFromParent()
-        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
+        movePipesAndRemove = createPipesMovementAction()
 
         // spawn the pipes
         let spawn = SKAction.run(spawnPipes)
