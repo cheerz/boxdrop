@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
 
     let verticalPipeGap = 170.0
     let delayBetweenPipes: TimeInterval = 2.0
@@ -59,6 +59,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if movingNode.speed > 0 {
+            for _ in touches { // do we need all touches?
+                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+            }
+        } else if canRestart {
+            resetScene()
+        }
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        /* Called before each frame is rendered */
+        let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
+        bird.zRotation = min(max(-1, value), 0.5)
+    }
 
     private func setupPhysics() {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
@@ -206,7 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(scoreLabelNode)
     }
 
-    func spawnPipes() {
+    private func spawnPipes() {
         let pipePair = SKNode()
         pipePair.position = CGPoint( x: self.frame.size.width + pipeTextureUp.size().width * 2, y: 0 )
         pipePair.zPosition = -10
@@ -247,7 +264,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-    func resetScene () {
+    private func resetScene () {
         // Move bird to original position and reset velocity
         bird.position = CGPoint(x: frame.width / 2.5, y: frame.midY)
         bird.physicsBody?.velocity = CGVector( dx: 0, dy: 0 )
@@ -268,23 +285,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Restart animation
         movingNode.speed = 1
     }
+}
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if movingNode.speed > 0 {
-            for _ in touches { // do we need all touches?
-                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
-            }
-        } else if canRestart {
-            resetScene()
-        }
-    }
-
-    override func update(_ currentTime: TimeInterval) {
-        /* Called before each frame is rendered */
-        let value = bird.physicsBody!.velocity.dy * ( bird.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
-        bird.zRotation = min(max(-1, value), 0.5)
-    }
+// MARK: - SKPhysicsContactDelegate
+extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         if movingNode.speed > 0 {
@@ -308,11 +312,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.removeAction(forKey: "flash")
                 self.run(SKAction.sequence([SKAction.repeat(SKAction.sequence([SKAction.run({
                     self.backgroundColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
-                    }), SKAction.wait(forDuration: TimeInterval(0.05)), SKAction.run({
-                        self.backgroundColor = self.skyColor
-                        }), SKAction.wait(forDuration: TimeInterval(0.05))]), count: 4), SKAction.run({
-                            self.canRestart = true
-                            })]), withKey: "flash")
+                }), SKAction.wait(forDuration: TimeInterval(0.05)), SKAction.run({
+                    self.backgroundColor = self.skyColor
+                }), SKAction.wait(forDuration: TimeInterval(0.05))]), count: 4), SKAction.run({
+                    self.canRestart = true
+                })]), withKey: "flash")
             }
         }
     }
