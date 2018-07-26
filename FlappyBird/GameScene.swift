@@ -133,7 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             moving.addChild(sprite)
         }
 
-        // create the pipes textures
         setPipeTextures()
 
         // create the pipes movement actions
@@ -149,7 +148,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let spawnThenDelayForever = SKAction.repeatForever(spawnThenDelay)
         self.run(spawnThenDelayForever)
 
-        // setup our bird
         setupBird()
 
         // create the ground
