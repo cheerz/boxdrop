@@ -33,6 +33,7 @@ class GameScene: SKScene {
         static let pipeUp = textureFrom(name: "pipe")
         static let pipeDown = textureFrom(name: "pipe")
         static let land = textureFrom(name: "land")
+        static let clouds = textureFrom(name: "clouds")
 
         static func textureFrom(name: String) -> SKTexture {
             return SKTexture(image: UIImage(named: name,
@@ -99,6 +100,11 @@ class GameScene: SKScene {
         groundTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
         return groundTexture
     }
+    private func createCloudsTexture() -> SKTexture {
+        let cloudsTexture = Texture.clouds
+        cloudsTexture.filteringMode = .nearest // shorter form for SKTextureFilteringMode.Nearest
+        return cloudsTexture
+    }
 
     private func createMoveGroundSpritesForever(groundTexture: SKTexture) -> SKAction {
         let moveGroundSprite = SKAction.moveBy(x: -groundTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.02 * groundTexture.size().width * 2.0))
@@ -119,7 +125,7 @@ class GameScene: SKScene {
         }
     }
 
-    private func createBird() -> SKSpriteNode {
+    private func createCheerzbox() -> SKSpriteNode {
         let anim = SKAction.animate(with: boxSprites, timePerFrame: 0.2)
         repeatActionBox = SKAction.repeatForever(anim)
 
@@ -143,21 +149,22 @@ class GameScene: SKScene {
         createScene()
     }
 
-    private func add(_ groundTexture: SKTexture, to node: SKNode) {
-        let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: groundTexture)
+    private func scrollForever(_ texture: SKTexture, _ yOffset: CGFloat, _ zPosition: CGFloat, to node: SKNode) {
+        let moveGroundSpritesForever = createMoveGroundSpritesForever(groundTexture: texture)
 
-        for i in 0 ..< 2 + Int(frame.width / (groundTexture.size().width * 2)) {
+        for i in 0 ..< 2 + Int(frame.width / (texture.size().width * 2)) {
             let i = CGFloat(i)
-            let sprite = SKSpriteNode(texture: groundTexture)
+            let sprite = SKSpriteNode(texture: texture)
             sprite.setScale(2.0)
+            sprite.zPosition = zPosition
             sprite.position = CGPoint(x: i * sprite.size.width,
-                                      y: sprite.size.height / 2.0)
+                                      y: CGFloat(yOffset) + sprite.size.height / 2.0)
             sprite.run(moveGroundSpritesForever)
             node.addChild(sprite)
         }
     }
 
-    private func add(_ bushTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
+    private func scrollForever(_ bushTexture: SKTexture, groundTexture: SKTexture, to node: SKNode) {
         bushTexture.filteringMode = .nearest
 
         let moveBushSprite = SKAction.moveBy(x: -bushTexture.size().width * 2.0, y: 0, duration: TimeInterval(0.1 * bushTexture.size().width * 2.0))
@@ -188,14 +195,17 @@ class GameScene: SKScene {
         setupPhysics()
         setupBackgroundColor()
 
+        let cloudsTexture = createCloudsTexture()
+        scrollForever(cloudsTexture, frame.size.height * 0.5, -10, to: movingNode)
+
         addChild(movingNode)
         movingNode.addChild(pipes)
 
         let groundTexture = createGroundTexture()
-        add(groundTexture, to: movingNode)
+         scrollForever(groundTexture, 0, 0, to: movingNode)
 
         let skyTexture = Texture.bush
-        add(skyTexture, groundTexture: groundTexture, to: movingNode)
+        scrollForever(skyTexture, groundTexture: groundTexture, to: movingNode)
 
         setPipeTextures()
 
@@ -209,7 +219,7 @@ class GameScene: SKScene {
         run(spawnThenDelayForever)
 
         setBirdsSprites()
-        cheerzbox = createBird()
+        cheerzbox = createCheerzbox()
         addChild(cheerzbox)
         cheerzbox.run(repeatActionBox)
 
