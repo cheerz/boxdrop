@@ -16,13 +16,11 @@ public protocol GameUploadingNavigator {
     func showNextView(action: GameUploadingCompletion?)
 
     func showPreviousView()
-
 }
 
 public protocol GameUploadingProgressListener {
 
     func onPhotoProgress(progress: Float, id: String)
-
 }
 
 public protocol GameUploadingModelProtocol {
@@ -55,6 +53,10 @@ protocol GameViewProtocol: class {
     func updateProgressView(value: Float)
 
     func updatePreview(image: UIImage)
+
+    func setButton(text: String)
+    
+    func setProgress(color: UIColor)
 }
 
 protocol GamePresenterProtocol {
