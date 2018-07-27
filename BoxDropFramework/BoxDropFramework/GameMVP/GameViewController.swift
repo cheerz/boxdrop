@@ -109,8 +109,7 @@ class GameViewController: UIViewController {
     // MARK: IBAction
 
     @IBAction func closeView(_ sender: UIButton) {
-        dismiss(animated: true)
-//        onStopButtonTapped() need refacto
+        presenter?.onStopButtonTapped()
     }
 }
 

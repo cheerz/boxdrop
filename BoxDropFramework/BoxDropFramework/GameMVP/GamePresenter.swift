@@ -25,7 +25,9 @@ class GamePresenter {
 
     private func updateProgressView() {
         if model.newImageNeeded() {
-            view?.updatePreview(image: UIImage(named: "iconApp")!)
+            if let image = UIImage(named: "iconApp") {
+                view?.updatePreview(image: image)
+            }
             model.getCurrentImage { image in
                 guard let image = image else { return }
                 self.view?.updatePreview(image: image)
@@ -53,10 +55,8 @@ extension GamePresenter: Game.Presenter {
 
     func onStopButtonTapped() {
         if model.isUploadComplete() {
-            print("showNext")
             navigator.showNextView(action: action)
         } else {
-            print("showPreviousView")
             navigator.showPreviousView()
         }
     }
