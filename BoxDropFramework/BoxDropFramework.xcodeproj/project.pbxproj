@@ -17,7 +17,6 @@
 		B21F6983210A53330029DC05 /* BoxDropFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C62F541210A16C3002D3754 /* BoxDropFramework.framework */; };
 		B21F698D210A6A370029DC05 /* GameViewControllerMVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F698C210A6A370029DC05 /* GameViewControllerMVP.swift */; };
 		B21F698F210A6B680029DC05 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F698E210A6B680029DC05 /* GamePresenter.swift */; };
-		B21F6991210A6B720029DC05 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21F6990210A6B720029DC05 /* GameModel.swift */; };
 		B21F69A0210A81080029DC05 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699A210A81070029DC05 /* Nunito-Bold.ttf */; };
 		B21F69A1210A81080029DC05 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699B210A81070029DC05 /* Nunito-Regular.ttf */; };
 		B21F69A2210A81080029DC05 /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B21F699C210A81070029DC05 /* NunitoSans-Bold.ttf */; };
@@ -52,7 +51,6 @@
 		B21F6982210A53330029DC05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B21F698C210A6A370029DC05 /* GameViewControllerMVP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerMVP.swift; sourceTree = "<group>"; };
 		B21F698E210A6B680029DC05 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
-		B21F6990210A6B720029DC05 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B21F699A210A81070029DC05 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		B21F699B210A81070029DC05 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		B21F699C210A81070029DC05 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 				B21F698C210A6A370029DC05 /* GameViewControllerMVP.swift */,
 				9C62F551210A18A2002D3754 /* GameViewController.swift */,
 				B21F698E210A6B680029DC05 /* GamePresenter.swift */,
-				B21F6990210A6B720029DC05 /* GameModel.swift */,
 				9C45B100210A1E4700C79653 /* GameViewController.storyboard */,
 			);
 			path = GameMVP;
@@ -282,7 +279,6 @@
 				B24F08AB210A8A9B001163C2 /* UIFont+getCustomFont.swift in Sources */,
 				B21F698F210A6B680029DC05 /* GamePresenter.swift in Sources */,
 				BF8F4AB85E74D4230EDB3809 /* BoxDropLauncher.swift in Sources */,
-				B21F6991210A6B720029DC05 /* GameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

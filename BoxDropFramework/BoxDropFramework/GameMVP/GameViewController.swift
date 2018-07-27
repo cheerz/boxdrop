@@ -64,6 +64,11 @@ class GameViewController: UIViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.onViewDidAppear()
+    }
+
     // MARK: - Device orientation
 
     override var shouldAutorotate: Bool {
@@ -91,7 +96,7 @@ class GameViewController: UIViewController {
     // MARK: IBAction
 
     @IBAction func closeView(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        presenter?.onStopButtonTapped()
     }
 }
 

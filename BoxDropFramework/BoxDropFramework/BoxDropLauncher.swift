@@ -7,14 +7,15 @@ import UIKit
 
 public class BoxDropLauncher {
 
-    public static func startGame(in viewController: UIViewController) {
+    public static func startGame(in viewController: UIViewController,
+                                 with model: GameUploadingModelProtocol,
+                                 navigator: GameUploadingNavigator,
+                                 action: GameUploadingCompletion?) {
         let board = UIStoryboard(name: "GameViewController",
                                  bundle: Bundle(for: BoxDropLauncher.self))
         guard let gameViewController = board.instantiateInitialViewController() as? GameViewController else { return }
+        let presenter = GamePresenter(model: model, view: gameViewController, navigator: navigator, action: action)
         gameViewController.modalPresentationStyle = .overCurrentContext
-
-        let model = GameModel()
-        let presenter = GamePresenter(model: model, view: gameViewController)
         gameViewController.presenter = presenter
         viewController.present(gameViewController, animated: true)
     }
