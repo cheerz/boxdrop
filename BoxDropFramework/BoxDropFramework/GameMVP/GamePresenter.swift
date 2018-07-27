@@ -7,6 +7,14 @@ class GamePresenter {
     private let navigator: GameUploadingNavigator
     private let action: GameUploadingCompletion?
 
+    let primary = UIColor(red: CGFloat(9.0) / 255, green: CGFloat(77.0) / 255, blue: CGFloat(95.0) / 255, alpha: 1.0)
+    let validation = UIColor(red: CGFloat(48) / 255, green: CGFloat(80) / 255, blue: CGFloat(32) / 255, alpha: 1.0)
+    
+    private enum Text: String {
+        case skip = "Skip"
+        case done = "Done"
+    }
+
     init(model: Game.Model, view: Game.View, navigator: GameUploadingNavigator, action: GameUploadingCompletion?) {
         self.model = model
         self.view = view
@@ -40,6 +48,8 @@ extension GamePresenter: Game.Presenter {
 
     func onViewDidAppear() {
         model.resetUploadIfNeeded()
+        view?.setButton(text: Text.skip.rawValue)
+        view?.setProgress(color: primary)
     }
 
     func onStopButtonTapped() {
@@ -56,6 +66,20 @@ extension GamePresenter: GameUploadingProgressListener {
     func onPhotoProgress(progress: Float, id: String) {
         model.updateProgress(id: id, progress: progress)
         _ = model.getProgress()
-        updateProgressView()
+        DispatchQueue.main.async {
+            self.updateProgressView()
+            self.updateText()
+            self.updateProgressColor()
+        }
+    }
+    
+    private func updateProgressColor() {
+        let color = model.isUploadComplete() ? validation : primary
+        view?.setProgress(color: color)
+    }
+
+    private func updateText() {
+        let text = model.isUploadComplete() ? Text.done.rawValue : Text.skip.rawValue
+        view?.setButton(text: text)
     }
 }

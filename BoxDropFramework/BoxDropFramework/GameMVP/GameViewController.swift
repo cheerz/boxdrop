@@ -86,6 +86,7 @@ class GameViewController: UIViewController {
     // MARK: Setup UI
 
     func setupUI() {
+        progressView.progressViewStyle = .bar
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
         closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoSemiBold.rawValue,
                                                      size: 17.0,
@@ -100,9 +101,16 @@ class GameViewController: UIViewController {
     }
 }
 
-
 // MARK: - Game.View
 extension GameViewController: Game.View {
+
+    func setButton(text: String) {
+        closeButtonLabel.text = text
+    }
+    
+    func setProgress(color: UIColor) {
+        progressView.progressTintColor = color
+    }
 
     func updateProgressView(value: Float) {
         progressView.setProgress(value, animated: true)
