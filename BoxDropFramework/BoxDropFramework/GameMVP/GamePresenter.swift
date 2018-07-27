@@ -9,7 +9,7 @@ class GamePresenter {
 
     let primary = UIColor(red: 22.0 / 255.0, green: 197.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
     let validation = UIColor(red: 122.0 / 255.0, green: 204.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
-    
+
     private enum Text: String {
         case skip = "Skip"
         case done = "Done"
@@ -37,9 +37,8 @@ class GamePresenter {
     private func checkUploadStatus() {
         if model.isUploadedOrFailed() {
             model.resetUploadIfNeeded()
-        } else {
-            self.updateProgressView()
         }
+        updateAllUI()
     }
 }
 
@@ -54,8 +53,10 @@ extension GamePresenter: Game.Presenter {
 
     func onStopButtonTapped() {
         if model.isUploadComplete() {
+            print("showNext")
             navigator.showNextView(action: action)
         } else {
+            print("showPreviousView")
             navigator.showPreviousView()
         }
     }
@@ -67,12 +68,16 @@ extension GamePresenter: GameUploadingProgressListener {
         model.updateProgress(id: id, progress: progress)
         _ = model.getProgress()
         DispatchQueue.main.async {
-            self.updateProgressView()
-            self.updateText()
-            self.updateProgressColor()
+            self.checkUploadStatus()
         }
     }
-    
+
+    private func updateAllUI() {
+        updateProgressView()
+        updateProgressColor()
+        updateText()
+    }
+
     private func updateProgressColor() {
         let color = model.isUploadComplete() ? validation : primary
         view?.setProgress(color: color)
