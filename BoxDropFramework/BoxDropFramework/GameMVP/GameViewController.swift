@@ -33,13 +33,16 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var closeButtonLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
 
     var presenter: Game.Presenter?
 
     private enum Font: String {
         case nunitoSemiBold = "Nunito-SemiBold"
+        case nunitoBold = "Nunito-Bold"
     }
 
     // MARK: - Lifecycle
@@ -48,7 +51,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
 
-        progressView.setProgress(0, animated: false)
+        updateProgressView(value: 0)
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
@@ -86,12 +89,21 @@ class GameViewController: UIViewController {
     // MARK: Setup UI
 
     func setupUI() {
+        bottomView.layer.cornerRadius = 8
         progressView.progressViewStyle = .bar
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
-        closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoSemiBold.rawValue,
+        closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoBold.rawValue,
                                                      size: 17.0,
                                                      bundle: Bundle(for: GameViewController.self),
                                                      type: .trueTypeFont)
+    }
+
+    // MARK: - Utilities
+
+    /// `value` should be between 0 and 1.
+    private func setProgressLabel(value: Float) {
+        let percentageValue = Int(value * 100)
+        progressLabel.text = "\(percentageValue) %"
     }
 
     // MARK: IBAction
@@ -114,6 +126,7 @@ extension GameViewController: Game.View {
 
     func updateProgressView(value: Float) {
         progressView.setProgress(value, animated: true)
+        setProgressLabel(value: value)
     }
 
     func updatePreview(image: UIImage) {

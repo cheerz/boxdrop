@@ -196,7 +196,7 @@ class GameScene: SKScene {
         setupBackgroundColor()
 
         let cloudsTexture = createCloudsTexture()
-        scrollForever(cloudsTexture, frame.size.height * 0.5, -10, to: movingNode)
+        scrollForever(cloudsTexture, frame.height * 0.5, -10, to: movingNode)
 
         addChild(movingNode)
         movingNode.addChild(pipes)
