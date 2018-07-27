@@ -11,8 +11,8 @@ class GamePresenter {
     let validation = UIColor(red: 122.0 / 255.0, green: 204.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
 
     private enum Text: String {
-        case skip = "Skip"
-        case done = "Done"
+        case skip = "SKIP"
+        case done = "DONE"
     }
 
     init(model: Game.Model, view: Game.View, navigator: GameUploadingNavigator, action: GameUploadingCompletion?) {
@@ -25,7 +25,7 @@ class GamePresenter {
 
     private func updateProgressView() {
         if model.newImageNeeded() {
-            view?.updatePreview(image: UIImage(named: "icon_placeholder_selection")!)
+            view?.updatePreview(image: UIImage(named: "iconApp")!)
             model.getCurrentImage { image in
                 guard let image = image else { return }
                 self.view?.updatePreview(image: image)
