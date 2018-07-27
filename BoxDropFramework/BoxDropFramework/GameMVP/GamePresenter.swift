@@ -25,7 +25,7 @@ class GamePresenter {
 
     private func updateProgressView() {
         if model.newImageNeeded() {
-            view?.updatePreview(image: UIImage(named: "icon_placeholder_selection")!)
+            view?.updatePreview(image: UIImage(named: "iconApp")!)
             model.getCurrentImage { image in
                 guard let image = image else { return }
                 self.view?.updatePreview(image: image)
