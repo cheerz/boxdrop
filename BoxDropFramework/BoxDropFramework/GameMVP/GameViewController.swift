@@ -47,7 +47,7 @@ class GameViewController: UIViewController {
 
     private struct Color {
         static let skipButton = UIColor(red: 1, green: 196.0 / 255, blue: 0, alpha: 1)
-        static let bottomView = UIColor(red: 1, green: 196.0 / 255, blue: 0, alpha: 1)
+        static let bottomView = UIColor(red: 249.0 / 255, green: 249.0 / 255, blue: 249.0 / 255, alpha: 1)
     }
 
     // MARK: - Lifecycle
@@ -94,9 +94,15 @@ class GameViewController: UIViewController {
     // MARK: Setup UI
 
     private func setupUI() {
+        setupPreviewImageUI()
         setupCloseButtonUI()
         setupBottomViewUI()
         setupProgressViewUI()
+    }
+
+    private func setupPreviewImageUI() {
+        previewImageView.layer.cornerRadius = 8
+        previewImageView.clipsToBounds = true
     }
 
     private func setupCloseButtonUI() {
@@ -110,12 +116,12 @@ class GameViewController: UIViewController {
 
     private func setupBottomViewUI() {
         bottomView.backgroundColor = Color.bottomView
-        bottomView.layer.cornerRadius = bottomView.frame.height / 2
+        bottomView.layer.cornerRadius = 24
     }
 
     private func setupProgressViewUI() {
         progressView.progressViewStyle = .bar
-        progressView.layer.cornerRadius = 8
+        progressView.layer.cornerRadius = 12
         progressView.clipsToBounds = true
     }
 
