@@ -7,8 +7,8 @@ class GamePresenter {
     private let navigator: GameUploadingNavigator
     private let action: GameUploadingCompletion?
 
-    let primary = UIColor(red: CGFloat(9.0) / 255, green: CGFloat(77.0) / 255, blue: CGFloat(95.0) / 255, alpha: 1.0)
-    let validation = UIColor(red: CGFloat(48) / 255, green: CGFloat(80) / 255, blue: CGFloat(32) / 255, alpha: 1.0)
+    let primary = UIColor(red: 22.0 / 255.0, green: 197.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
+    let validation = UIColor(red: 122.0 / 255.0, green: 204.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
     
     private enum Text: String {
         case skip = "Skip"
