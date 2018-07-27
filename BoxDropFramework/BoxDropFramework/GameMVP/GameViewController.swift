@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var closeButtonView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var closeButtonLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!

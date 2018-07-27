@@ -112,6 +112,7 @@
                         <outlet property="bottomView" destination="fxn-uF-8l5" id="q6S-XO-J4T"/>
                         <outlet property="closeButton" destination="gj1-tm-Nhw" id="ek0-H0-FLy"/>
                         <outlet property="closeButtonLabel" destination="ife-w6-hrd" id="iYD-J8-341"/>
+                        <outlet property="closeButtonView" destination="tVZ-8y-VmU" id="gHb-Qw-c8e"/>
                         <outlet property="previewImageView" destination="dkb-g6-jP1" id="6Av-6n-SLX"/>
                         <outlet property="progressLabel" destination="fY7-Ko-UXn" id="N9Q-an-Mn4"/>
                         <outlet property="progressView" destination="ik6-LV-mq1" id="DP9-fm-fVT"/>
