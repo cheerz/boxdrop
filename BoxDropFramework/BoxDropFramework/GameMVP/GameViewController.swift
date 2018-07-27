@@ -45,6 +45,11 @@ class GameViewController: UIViewController {
         case nunitoBold = "Nunito-Bold"
     }
 
+    private struct Color {
+        static let skipButton = UIColor(red: 1, green: 196.0 / 255, blue: 0, alpha: 1)
+        static let bottomView = UIColor(red: 1, green: 196.0 / 255, blue: 0, alpha: 1)
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -88,14 +93,30 @@ class GameViewController: UIViewController {
 
     // MARK: Setup UI
 
-    func setupUI() {
-        bottomView.layer.cornerRadius = 8
-        progressView.progressViewStyle = .bar
+    private func setupUI() {
+        setupCloseButtonUI()
+        setupBottomViewUI()
+        setupProgressViewUI()
+    }
+
+    private func setupCloseButtonUI() {
+        closeButton.backgroundColor = Color.skipButton
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
         closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoBold.rawValue,
                                                      size: 17.0,
                                                      bundle: Bundle(for: GameViewController.self),
                                                      type: .trueTypeFont)
+    }
+
+    private func setupBottomViewUI() {
+        bottomView.backgroundColor = Color.bottomView
+        bottomView.layer.cornerRadius = bottomView.frame.height / 2
+    }
+
+    private func setupProgressViewUI() {
+        progressView.progressViewStyle = .bar
+        progressView.layer.cornerRadius = 8
+        progressView.clipsToBounds = true
     }
 
     // MARK: - Utilities
