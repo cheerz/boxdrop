@@ -42,6 +42,7 @@ class GameViewController: UIViewController {
 
     private enum Font: String {
         case nunitoSemiBold = "Nunito-SemiBold"
+        case nunitoBold = "Nunito-Bold"
     }
 
     // MARK: - Lifecycle
@@ -91,7 +92,7 @@ class GameViewController: UIViewController {
         bottomView.layer.cornerRadius = 8
         progressView.progressViewStyle = .bar
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
-        closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoSemiBold.rawValue,
+        closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoBold.rawValue,
                                                      size: 17.0,
                                                      bundle: Bundle(for: GameViewController.self),
                                                      type: .trueTypeFont)

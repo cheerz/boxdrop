@@ -11,8 +11,8 @@ class GamePresenter {
     let validation = UIColor(red: 122.0 / 255.0, green: 204.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
     
     private enum Text: String {
-        case skip = "Skip"
-        case done = "Done"
+        case skip = "SKIP"
+        case done = "DONE"
     }
 
     init(model: Game.Model, view: Game.View, navigator: GameUploadingNavigator, action: GameUploadingCompletion?) {
