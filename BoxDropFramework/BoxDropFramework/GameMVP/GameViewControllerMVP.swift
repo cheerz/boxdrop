@@ -6,6 +6,19 @@ enum Game {
     typealias Presenter = GamePresenterProtocol
 }
 
+public enum GameUploadingCompletion {
+    case updateCart
+    case removeProduct(Int)
+}
+
+public protocol GameUploadingNavigator {
+
+    func showNextView(action: GameUploadingCompletion?)
+
+    func showPreviousView()
+
+}
+
 public protocol GameUploadingProgressListener {
 
     func onPhotoProgress(progress: Float, id: String)
@@ -46,4 +59,7 @@ protocol GameViewProtocol: class {
 
 protocol GamePresenterProtocol {
 
+    func onViewDidAppear()
+
+    func onStopButtonTapped()
 }
