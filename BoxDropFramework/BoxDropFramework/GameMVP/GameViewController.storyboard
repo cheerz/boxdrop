@@ -66,17 +66,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-uF-8l5" userLabel="Bottom View">
                                 <rect key="frame" x="18.5" y="587" width="337.5" height="60"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dkb-g6-jP1">
-                                        <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconApp" translatesAutoresizingMaskIntoConstraints="NO" id="dkb-g6-jP1">
+                                        <rect key="frame" x="20" y="8" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="dkb-g6-jP1" secondAttribute="height" multiplier="1:1" id="7nl-RJ-rIy"/>
                                         </constraints>
                                     </imageView>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ik6-LV-mq1" userLabel="Add">
-                                        <rect key="frame" x="60" y="8" width="269.5" height="44"/>
+                                        <rect key="frame" x="84" y="12" width="245.5" height="36"/>
                                     </progressView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY7-Ko-UXn">
-                                        <rect key="frame" x="164.5" y="13.5" width="60" height="33"/>
+                                        <rect key="frame" x="176.5" y="13.5" width="60" height="33"/>
                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -86,14 +86,14 @@
                                 <constraints>
                                     <constraint firstItem="dkb-g6-jP1" firstAttribute="top" secondItem="fxn-uF-8l5" secondAttribute="top" constant="8" id="DDi-dF-GdZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ik6-LV-mq1" secondAttribute="trailing" constant="8" id="EwG-TY-VYS"/>
-                                    <constraint firstAttribute="bottom" secondItem="ik6-LV-mq1" secondAttribute="bottom" constant="8" id="Gb3-j0-4zm"/>
                                     <constraint firstAttribute="bottom" secondItem="dkb-g6-jP1" secondAttribute="bottom" constant="8" id="JPT-0n-wTC"/>
-                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="top" secondItem="fxn-uF-8l5" secondAttribute="top" constant="8" id="RHe-KH-6E7"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="centerY" secondItem="fxn-uF-8l5" secondAttribute="centerY" id="Lk7-Zv-mgo"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="top" secondItem="fxn-uF-8l5" secondAttribute="top" constant="12" id="RHe-KH-6E7"/>
                                     <constraint firstItem="fY7-Ko-UXn" firstAttribute="centerY" secondItem="ik6-LV-mq1" secondAttribute="centerY" id="dyy-dx-qfL"/>
                                     <constraint firstItem="fY7-Ko-UXn" firstAttribute="centerX" secondItem="ik6-LV-mq1" secondAttribute="centerX" id="hLq-Nd-Yhn"/>
-                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="leading" secondItem="dkb-g6-jP1" secondAttribute="trailing" constant="8" id="n74-h7-ElO"/>
+                                    <constraint firstItem="ik6-LV-mq1" firstAttribute="leading" secondItem="dkb-g6-jP1" secondAttribute="trailing" constant="20" id="n74-h7-ElO"/>
                                     <constraint firstItem="ik6-LV-mq1" firstAttribute="centerY" secondItem="fxn-uF-8l5" secondAttribute="centerY" id="rgS-yn-3IN"/>
-                                    <constraint firstItem="dkb-g6-jP1" firstAttribute="leading" secondItem="fxn-uF-8l5" secondAttribute="leading" constant="8" id="yj8-Ni-5ZY"/>
+                                    <constraint firstItem="dkb-g6-jP1" firstAttribute="leading" secondItem="fxn-uF-8l5" secondAttribute="leading" constant="20" id="yj8-Ni-5ZY"/>
                                     <constraint firstAttribute="height" constant="60" id="yog-v1-Qa7"/>
                                 </constraints>
                             </view>
@@ -112,6 +112,7 @@
                         <outlet property="bottomView" destination="fxn-uF-8l5" id="q6S-XO-J4T"/>
                         <outlet property="closeButton" destination="gj1-tm-Nhw" id="ek0-H0-FLy"/>
                         <outlet property="closeButtonLabel" destination="ife-w6-hrd" id="iYD-J8-341"/>
+                        <outlet property="closeButtonView" destination="tVZ-8y-VmU" id="gHb-Qw-c8e"/>
                         <outlet property="previewImageView" destination="dkb-g6-jP1" id="6Av-6n-SLX"/>
                         <outlet property="progressLabel" destination="fY7-Ko-UXn" id="N9Q-an-Mn4"/>
                         <outlet property="progressView" destination="ik6-LV-mq1" id="DP9-fm-fVT"/>
@@ -122,4 +123,7 @@
             <point key="canvasLocation" x="-343.19999999999999" y="-24.7376311844078"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iconApp" width="180" height="180"/>
+    </resources>
 </document>

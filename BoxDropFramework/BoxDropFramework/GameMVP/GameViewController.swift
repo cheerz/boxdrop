@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var closeButtonView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var closeButtonLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
@@ -43,6 +44,11 @@ class GameViewController: UIViewController {
     private enum Font: String {
         case nunitoSemiBold = "Nunito-SemiBold"
         case nunitoBold = "Nunito-Bold"
+    }
+
+    private struct Color {
+        static let skipButton = UIColor(red: 1, green: 196.0 / 255, blue: 0, alpha: 1)
+        static let bottomView = UIColor(red: 249.0 / 255, green: 249.0 / 255, blue: 249.0 / 255, alpha: 1)
     }
 
     // MARK: - Lifecycle
@@ -88,14 +94,36 @@ class GameViewController: UIViewController {
 
     // MARK: Setup UI
 
-    func setupUI() {
-        bottomView.layer.cornerRadius = 8
-        progressView.progressViewStyle = .bar
+    private func setupUI() {
+        setupPreviewImageUI()
+        setupCloseButtonUI()
+        setupBottomViewUI()
+        setupProgressViewUI()
+    }
+
+    private func setupPreviewImageUI() {
+        previewImageView.layer.cornerRadius = 8
+        previewImageView.clipsToBounds = true
+    }
+
+    private func setupCloseButtonUI() {
+        closeButton.backgroundColor = Color.skipButton
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
         closeButtonLabel.font = UIFont.getCustomFont(name: Font.nunitoBold.rawValue,
                                                      size: 17.0,
                                                      bundle: Bundle(for: GameViewController.self),
                                                      type: .trueTypeFont)
+    }
+
+    private func setupBottomViewUI() {
+        bottomView.backgroundColor = Color.bottomView
+        bottomView.layer.cornerRadius = 24
+    }
+
+    private func setupProgressViewUI() {
+        progressView.progressViewStyle = .bar
+        progressView.layer.cornerRadius = 12
+        progressView.clipsToBounds = true
     }
 
     // MARK: - Utilities
