@@ -9,7 +9,7 @@ class GamePresenter {
 
     let primary = UIColor(red: 22.0 / 255.0, green: 197.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
     let validation = UIColor(red: 122.0 / 255.0, green: 204.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
-    
+
     private enum Text: String {
         case skip = "SKIP"
         case done = "DONE"
@@ -25,7 +25,9 @@ class GamePresenter {
 
     private func updateProgressView() {
         if model.newImageNeeded() {
-            view?.updatePreview(image: UIImage(named: "iconApp")!)
+            if let image = UIImage(named: "iconApp") {
+                view?.updatePreview(image: image)
+            }
             model.getCurrentImage { image in
                 guard let image = image else { return }
                 self.view?.updatePreview(image: image)
@@ -37,9 +39,8 @@ class GamePresenter {
     private func checkUploadStatus() {
         if model.isUploadedOrFailed() {
             model.resetUploadIfNeeded()
-        } else {
-            self.updateProgressView()
         }
+        updateAllUI()
     }
 }
 
@@ -67,12 +68,16 @@ extension GamePresenter: GameUploadingProgressListener {
         model.updateProgress(id: id, progress: progress)
         _ = model.getProgress()
         DispatchQueue.main.async {
-            self.updateProgressView()
-            self.updateText()
-            self.updateProgressColor()
+            self.checkUploadStatus()
         }
     }
-    
+
+    private func updateAllUI() {
+        updateProgressView()
+        updateProgressColor()
+        updateText()
+    }
+
     private func updateProgressColor() {
         let color = model.isUploadComplete() ? validation : primary
         view?.setProgress(color: color)
